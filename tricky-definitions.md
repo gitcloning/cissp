@@ -1,4 +1,5 @@
-## Definitions I've forgotten on practice tests
+# Definitions I've forgotten on practice tests
+
 * RPO - recovery point objective: identifies the maximum amount of data, measured in time, that may be lost during a recovery effort
 * RTO - recovery time objective: the amount of time expected to return an IT service to operation after failure
 * MTD - maximum tolerable down time: longest amount of time that an IT service may be unavailable without causing serious damage
@@ -16,7 +17,7 @@
   * Primary - uniquely identifies a row
   * Foreign - uniquely identifies a row and matches to another table
   * Referential - not a database key
- * fire extinguishers - this makes me so mad that we have to memorize these types
+  * fire extinguishers - this makes me so mad that we have to memorize these types
   * A - Fires that involve solid or organic materials, such as wood, plastics, paper, textiles, or coal
   * B - Fires that involve flammable liquids, such as gasoline, petroleum oil, paint, or diesel
   * C -  Fires that involve flammable gases, such as propane, butane, or methane
@@ -42,10 +43,12 @@
   * SAML - used to exchange user authentication and authorization data
   * XACML - used to describe access controls
   * SOAP -  like REST but has security in mind. Outlines how web service information is exchanged. When requesting access, a SOAP body contains a SAML request or response inside of it
-  * REST - Representation State Transfer. an approach that uses HTTP protocol to access and manipulate text without keeping track of any data(or state)
-  * OAUTH - open standard for authorization(not authentication) to third parties. Like when you authenticate with facebook, you can then authorize it to go off and manage your photos. Facebook could access your photos until you tell it not to anymore
+  * REST - Representation State Transfer. an approach that uses HTTP protocol to access and manipulate text without keeping track of any data\(or state\)
+  * OAUTH - open standard for authorization\(not authentication\) to third parties. Like when you authenticate with facebook, you can then authorize it to go off and manage your photos. Facebook could access your photos until you tell it not to anymore
 * Primary storage - ram is primary storage. secondary storage is hdds, solid state, and optical drives
-Whoa.. just got 11/24 on a practice test... 
+
+  Whoa.. just got 11/24 on a practice test... 
+
 * SIEM helps provide automated analysis and monitoring of logs and security events.  not syslog.
 * Requiring authentication provides accountability be ensuring actions taken can be tracked to a specific user
 * PAT - port address translation allows a network to use any IP address set inside without causing a conclict with the public internet
@@ -55,5 +58,4 @@ Whoa.. just got 11/24 on a practice test...
 * RFC 1918 is range of 10.0.0.0 - 10.255.255.255
 * passive monitoring is : network tap or span port.  active monitoring relies on sythetic or previously recorded traffic.
 * RSA requiresly only two keys for each user... fucking duh. even if you have 10,000,000 people, they each just need a public and private key to be able to talk to everyone.  they go and get the other persons public key before sending messages.
-
 
