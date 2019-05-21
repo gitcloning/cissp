@@ -1,6 +1,6 @@
 # Software Development Security
 
-[Back to Home Page](https://github.com/so87/CISSP-Study-Guide) <br />
+[Home Page](http://sgn.256-bit.com)   <br />
 
 
 ## Understand and integrate security in the Software Development Life Cycle \(SDLC\)
@@ -40,6 +40,6 @@ There could be vulnerabilities and flaws in software that is acquired. There cou
 * Security of application programming interfaces - test interfaces for abuse cases/fuzzing
 * Secure coding practices - ASD STIG, CERT SEI, OWASP Top 10, SANS Top 25 
 
-[Back to Home Page](https://github.com/so87/CISSP-Study-Guide)   
+[Home Page](http://sgn.256-bit.com)
 
 
