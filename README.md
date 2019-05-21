@@ -34,7 +34,7 @@ Need 5 years expierence for certification. Get associate if less than that.
  All domains 10-15% of score   
  [Official Information](https://www.isc2.org/Certifications/-/media/CC72396FD9F34D3AAF073BF2AADB185C.ashx)
 
-## GLossary
+## Glossary
 [Glossary](Glossary.md)  
 
 ## Study Tools:
