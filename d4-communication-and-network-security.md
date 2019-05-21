@@ -1,7 +1,7 @@
 # Communication and Network Security.md
 
-[Back to Home Page](https://github.com/so87/CISSP-Cheat-Sheet-)   
- [To next domain! - D5 - Identity and Access Management](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D5%20-%20Identity%20and%20Access%20Management.md)   
+[Home Page](http://sgn.256-bit.com)   
+ [To next domain! - D5 - Identity and Access Management](d5-identity-and-access-management.md)   
 
 
 ## Implement secure design principles in network architectures
@@ -47,7 +47,7 @@ Figure out what type of security mechanisms are best for scenarios you get on th
 * Data communications
 * Virtualized networks
 
-[Back to Home Page](https://github.com/so87/CISSP-Cheat-Sheet-)   
- [To next domain! - D5 - Identity and Access Management](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D5%20-%20Identity%20and%20Access%20Management.md)   
+[Home Page](http://sgn.256-bit.com)   
+ [To next domain! - D5 - Identity and Access Management](d5-identity-and-access-management.md)   
 
 
