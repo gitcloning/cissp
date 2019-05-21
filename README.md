@@ -38,6 +38,13 @@ Need 5 years expierence for certification. Get associate if less than that.
 [Glossary](Glossary.md)  
 [Tricky](tricky-definitions.md)
 
+## Practice Exams
+[Cybervista](https://www.cybervista.net/cissp-practice-cat-quiz/)
+[Techtarget](https://searchsecurity.techtarget.com/quiz/Cybersecurity-risk-management-CISSP-practice-exam)
+[Networkasia](https://www.networksasia.net/article/cissp-domain-1-quiz-security-management-practices-1221494400)
+[Grocertify-1](http://www.gocertify.com/quizzes/isc2-quizzes/cissp-domain-1-security-and-risk-management.html)
+[Grocertify-2]{http://www.gocertify.com/isc2/cissp-practice-quiz-domain-1- security-and-risk-management-quiz-2)
+
 ## Study Tools:
 
 [General Tips](https://github.com/so87/CISSP-Study-Guide/blob/master/General%20Tips.md)  
@@ -47,7 +54,6 @@ Need 5 years expierence for certification. Get associate if less than that.
  [More Free Videos](https://www.youtube.com/watch?v=JWqd_qaR81g&list=PLEiEAq2VkUUId6PKW0fpJdBRJO5MFQ8VM)   
  [Video Questions](https://www.youtube.com/watch?v=JywLANSd-1E&list=PLfuKjbmP_JpVtQSl9AL7PPIxrim6K8q0r)   
  [Flash cards](https://quizlet.com/2519918/cissp-practice-flash-cards/)   
- [Pratice Tests](https://www.amazon.com/CISSP-Official-ISC-Practice-Tests/dp/1119475929/ref=mt_paperback?_encoding=UTF8&me=&qid=1532002117)   
  [Review on Exam](https://www.youtube.com/watch?v=eLYbFtS7G9E)   
  [Learning how to learn.](https://www.amazon.com/Unlimited-Memory-Advanced-Strategies-Productive-ebook/dp/B00I3QS1XQ/ref=sr_1_3_sspa?s=books&ie=UTF8&qid=1540590777&sr=1-3-spons&keywords=learning+how+to+learn&psc=1) If you are going to spend 200 hours learning you might as well take 10 to do it right?   
 
