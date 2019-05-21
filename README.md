@@ -43,7 +43,7 @@ Need 5 years expierence for certification. Get associate if less than that.
 [Techtarget](https://searchsecurity.techtarget.com/quiz/Cybersecurity-risk-management-CISSP-practice-exam)
 [Networkasia](https://www.networksasia.net/article/cissp-domain-1-quiz-security-management-practices-1221494400)
 [Grocertify-1](http://www.gocertify.com/quizzes/isc2-quizzes/cissp-domain-1-security-and-risk-management.html)
-[Grocertify-2]{http://www.gocertify.com/isc2/cissp-practice-quiz-domain-1- security-and-risk-management-quiz-2)
+[Grocertify-2](http://www.gocertify.com/isc2/cissp-practice-quiz-domain-1- security-and-risk-management-quiz-2)
 
 ## Study Tools:
 
