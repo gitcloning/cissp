@@ -1,7 +1,7 @@
 # Security and Risk Management
 
-[Back to Home Page](https://github.com/so87/CISSP-Cheat-Sheet-)   
- [To next domain! - D2 - Asset Security](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D2%20-%20Asset%20Security.md)   
+[Home Page](http://sgn.256-bit.com/)   
+ [To next domain! - D2 - Asset Security](d2-asset-security.md)   
 
 
 ## Understand and apply concepts of confidentiality, integrity and availability
@@ -139,7 +139,7 @@ Examples below
 * Periodic content reviews - make sure as new responsibilities and processes arise that we have security training in mind for them. make sure we are being aware of current threats
 * Program effectiveness evaluation - track enforcement and enhancement of security initiatives. periodic walk throughs and quizes to make sure people are staying up to date
 
-[Back to Home Page](https://github.com/so87/CISSP-Cheat-Sheet-)   
- [To next domain! - D2 - Asset Security](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D2%20-%20Asset%20Security.md)   
+[Home Page](http://sgn.256-bit.com)   
+ [To next domain! - D2 - Asset Security](d2-asset-security.md)   
 
 
