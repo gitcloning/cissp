@@ -2,8 +2,8 @@
 
 ## Security Operations
 
-[Back to Home Page](https://github.com/so87/CISSP-Study-Guide)   
- [To next domain! - D8 - Software Development Security](https://github.com/so87/CISSP-Study-Guide/blob/master/D8%20-%20Software%20Development%20Security.md)   
+[Home Page](http://sgn.256-bit.com)
+ [To next domain! - D8 - Software Development Security](d8-software-development-security.md)   
 
 
 ## Understand and support investigations, Evidence collection, and handling
@@ -144,7 +144,7 @@ Identitfy and prioritize critical IT systems and components. there are templates
 * Emergency management - what to do if asset is lost? stolen? in danager?
 * Duress - threats against someone to get them to do something against their better judgement
 
-[Back to Home Page](https://github.com/so87/CISSP-Study-Guide)   
- [To next domain! - D8 - Software Development Security](https://github.com/so87/CISSP-Study-Guide/blob/master/D8%20-%20Software%20Development%20Security.md)   
+[Home Page](http://sgn.256-bit.com)   
+ [To next domain! - D8 - Software Development Security](d8-software-development-security.md)   
 
 
