@@ -5,6 +5,14 @@
 
 * Forked from Simon Owens and add some notes.
 
+# Why become a CISSP?
+• To broaden your current knowledge of security concepts and practices <br/>
+• To demonstrate your expertise as a seasoned security professional <br/>
+• To become more marketable in a competitive workforce <br/>
+• To increase your salary and be eligible for more employment opportunities <br/>
+• To bring improved security expertise to your current occupation <br/>
+• To show a dedication to the security discipline <br/>
+
 ## Domain Study Guides and Notes
 
 [Domain 1: Security and Risk Management](d1-security-and-risk-management.md)
