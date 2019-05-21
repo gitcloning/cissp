@@ -36,6 +36,7 @@ Need 5 years expierence for certification. Get associate if less than that.
 
 ## Glossary
 [Glossary](Glossary.md)  
+[Tricky](tricky-definitions.md)
 
 ## Study Tools:
 
