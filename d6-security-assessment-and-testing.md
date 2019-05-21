@@ -1,7 +1,7 @@
 # Security Assessment and Testing
 
-[Back to Home Page](https://github.com/so87/CISSP-Cheat-Sheet-)   
- [To next domain! - D7 - Security Operations](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D7%20-%20Security%20Operations.md)   
+[Home Page](http://sgn.256-bit.com)   
+ [To next domain! - D7 - Security Operations](d7-security-operations.md)   
 
 
 ## Definitions
@@ -71,7 +71,7 @@ Same thing as the first title in this section, except you are doing this for rea
 * External 
 * Third-party
 
-[Back to Home Page](https://github.com/so87/CISSP-Cheat-Sheet-)   
- [To next domain! - D7 - Security Operations](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D7%20-%20Security%20Operations.md)   
+[Home Page](http://sgn.256-bit.com)   
+ [To next domain! - D7 - Security Operations](d7-security-operations.md)   
 
 
