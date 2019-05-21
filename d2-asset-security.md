@@ -1,7 +1,7 @@
 # Asset Security
 
-[Back to Home Page](https://github.com/so87/CISSP-Cheat-Sheet-)   
- [To next domain! - D3 - Security Architecture and Engineering](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D3%20-%20Security%20Architecture%20and%20Engineering.md)   
+[Home Page](http://sgn.256-bit.com)   
+ [To next domain! - D3 - Security Architecture and Engineering](d3-security-architecture-and-engineering.md)   
 
 
 ## Identify and classify information and assets
@@ -36,7 +36,7 @@ Information stops being useful after a certain amount of time. Sensitive data sh
 
 Need to have classification and need to know before accessing information or assets. There should be solid justification for accessing these things.
 
-[Back to Home Page](https://github.com/so87/CISSP-Cheat-Sheet-)   
- [To next domain! - D3 - Security Architecture and Engineering](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D3%20-%20Security%20Architecture%20and%20Engineering.md)   
+[Home Page](http://sgn.256-bit.com)   
+ [To next domain! - D3 - Security Architecture and Engineering](d3-security-architecture-and-engineering.md)   
 
 
