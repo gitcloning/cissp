@@ -3,8 +3,7 @@
 ![alt text](https://static1.squarespace.com/static/5606c039e4b0392b97642a02/568c23eebfe873997304f37e/57005e4101dbae8fc9b54c3c/1505756241062/cissp-logo-4lines.jpg?format=500w)   
  This is study material for the 2018 CISSP Exam. There are links below to my notes on each domain, information about the exam, and other study tools.
 
-* Like this repository?  Star it!  Helps get this out to other people!
-* Want to contribute? Something incorrect?  Make a change and push it back to me!
+* Fork from Simon Owens and add some notes.
 
 ## Domain Study Guides and Notes
 
@@ -48,5 +47,4 @@ Need 5 years expierence for certification. Get associate if less than that.
  [Review on Exam](https://www.youtube.com/watch?v=eLYbFtS7G9E)   
  [Learning how to learn.](https://www.amazon.com/Unlimited-Memory-Advanced-Strategies-Productive-ebook/dp/B00I3QS1XQ/ref=sr_1_3_sspa?s=books&ie=UTF8&qid=1540590777&sr=1-3-spons&keywords=learning+how+to+learn&psc=1) If you are going to spend 200 hours learning you might as well take 10 to do it right?   
  [Tricky definitions I've missed on practice tests](https://github.com/so87/CISSP-Study-Guide/blob/master/tricky%20definitions.md)  
-
 
