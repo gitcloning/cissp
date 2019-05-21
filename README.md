@@ -35,7 +35,7 @@ Need 5 years expierence for certification. Get associate if less than that.
  [Official Information](https://www.isc2.org/Certifications/-/media/CC72396FD9F34D3AAF073BF2AADB185C.ashx)
 
 ## GLossary
-[Glossary]Glossary.md)  
+[Glossary](Glossary.md)  
 
 ## Study Tools:
 
