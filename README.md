@@ -9,21 +9,21 @@
 
 [Domain 1: Security and Risk Management](d1-security-and-risk-management.md)
 
-[Domain 2: Asset Security](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D2%20-%20Asset%20Security.md)
+[Domain 2: Asset Security](d2-asset-security.md)
 
-[Domain 3: Security Architecture and Engineering](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D3%20-%20Security%20Architecture%20and%20Engineering.md)
+[Domain 3: Security Architecture and Engineering](d3-security-architecture-and-engineering.md)
 
-[Domain 4: Communication and Network Security](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D4%20-%20Communication%20and%20Network%20Security.md)
+[Domain 4: Communication and Network Security](d4-communication-and-network-security.md)
 
-[Domain 5: Identity and Access Management \(IAM\)](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D5%20-%20Identity%20and%20Access%20Management.md)
+[Domain 5: Identity and Access Management \(IAM\)](d5-identity-and-access-management.md)
 
-[Domain 6: Security Assessment and Testing](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D6%20-%20Security%20Assessment%20and%20Testing.md)
+[Domain 6: Security Assessment and Testing](d6-security-assessment-and-testing.md)
 
-[Domain 7: Security Operations](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D7%20-%20Security%20Operations.md)
+[Domain 7: Security Operations](d7-security-operations.md)
 
-[Domain 8: Software Development Security](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D8%20-%20Software%20Development%20Security.md)
+[Domain 8: Software Development Security](d8-software-development-security.md)
 
-[Another great study guide with definitions and pictures](https://github.com/so87/CISSP-Study-Guide/blob/master/StudyNotes.pdf) Thanks Scott Gibbsons for sharing!
+[Another great study guide with definitions and pictures](StudyNotes.pdf) Thanks Scott Gibbsons for sharing!
 
 ## About the exam:
 
