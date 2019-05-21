@@ -1,4 +1,4 @@
-# README
+
 
 ![alt text](https://static1.squarespace.com/static/5606c039e4b0392b97642a02/568c23eebfe873997304f37e/57005e4101dbae8fc9b54c3c/1505756241062/cissp-logo-4lines.jpg?format=500w)   
  This is study material for the 2018 CISSP Exam. There are links below to my notes on each domain, information about the exam, and other study tools.
