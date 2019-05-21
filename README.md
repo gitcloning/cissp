@@ -7,7 +7,7 @@
 
 ## Domain Study Guides and Notes
 
-[Domain 1: Security and Risk Management](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D1%20-%20Security%20and%20Risk%20Management.md)
+[Domain 1: Security and Risk Management](d1-security-and-risk-management.md)
 
 [Domain 2: Asset Security](https://github.com/so87/CISSP-Cheat-Sheet-/blob/master/D2%20-%20Asset%20Security.md)
 
@@ -47,4 +47,3 @@ Need 5 years expierence for certification. Get associate if less than that.
  [Review on Exam](https://www.youtube.com/watch?v=eLYbFtS7G9E)   
  [Learning how to learn.](https://www.amazon.com/Unlimited-Memory-Advanced-Strategies-Productive-ebook/dp/B00I3QS1XQ/ref=sr_1_3_sspa?s=books&ie=UTF8&qid=1540590777&sr=1-3-spons&keywords=learning+how+to+learn&psc=1) If you are going to spend 200 hours learning you might as well take 10 to do it right?   
  [Tricky definitions I've missed on practice tests](https://github.com/so87/CISSP-Study-Guide/blob/master/tricky%20definitions.md)  
-
