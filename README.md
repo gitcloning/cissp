@@ -55,7 +55,7 @@ Need 5 years expierence for certification. Get associate if less than that.
 
 ## Study Tools:
 
-[General Tips](https://github.com/so87/CISSP-Study-Guide/blob/master/General%20Tips.md)  
+[General Tips](general-tips.md)  
  [Free Government Training](https://fedvte.usalearning.gov/)   
  [Book](https://www.amazon.com/CISSP-All-One-Guide-Seventh/dp/0071849270/ref=sr_1_6?s=books&ie=UTF8&qid=1525371721&sr=1-6&keywords=cissp)   
  [Video Course\(cybrary\)](https://www.cybrary.it/course/cissp/)   
