@@ -12,3 +12,5 @@ url: "https://sgn.256-bit.com"
 baseurl: ""
 title: CISSP Prep
 description: "CISSP Study Guide and notes"
+author:
+  github: https://github.com/twofivesixbit
