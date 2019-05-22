@@ -1,3 +1,5 @@
 theme: jekyll-theme-hacker
+url: "https://sgn.256-bit.com"
+baseurl: ""
 title: CISSP Prep
 description: "CISSP Study Guide and notes"
