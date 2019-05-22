@@ -5,6 +5,9 @@ plugins:
   - jekyll-redirect-from
   - jekyll-sitemap
   - jekyll-feed
+ - jekyll-seo-tag
+ - jekyll-avatar
+ - jekyll-include-cache
 url: "https://sgn.256-bit.com"
 baseurl: ""
 title: CISSP Prep
