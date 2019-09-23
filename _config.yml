@@ -8,7 +8,7 @@ plugins:
  - jekyll-seo-tag
  - jekyll-avatar
  - jekyll-include-cache
-url: "https://sgn.256-bit.com"
+url: "https://geekbuilt.github.io/cissp"
 baseurl: ""
 title: CISSP Prep
 description: "CISSP Study Guide and notes"
