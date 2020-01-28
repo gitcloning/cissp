@@ -6,7 +6,16 @@
 
 ## Implement secure design principles in network architectures
 
-* Open System Interconnection \(OSI\) and Transmission Control Protocol/Internet Protocol \(TCP/IP\) models &lt;/br&gt;Layers: &lt;/br&gt;7. Application - Google chrome &lt;/br&gt;6. Presentation - JPEG &lt;/br&gt;5. Sessions - RPC &lt;/br&gt;4. Transport - TCP/UDP &lt;/br&gt;3. Network - IP Addressing &lt;/br&gt;2. Data Link - MAC Address &lt;/br&gt;1. Physical - Electrical/Optical Current &lt;/br&gt;Think of it like you are trying to send a package of cookies to someone else half way across the world.
+* Open System Interconnection \(OSI\) and Transmission Control Protocol/Internet Protocol \(TCP/IP\) models  
+Layers:  
+7. Application - Google chrome  
+6. Presentation - JPEG  
+5. Sessions - RPC  
+4. Transport - TCP/UDP  
+3. Network - IP Addressing  
+2. Data Link - MAC Address  
+1. Physical - Electrical/Optical Current  
+Think of it like you are trying to send a package of cookies to someone else half way across the world.
 * Internet Protocol \(IP\) networking - DHCP on LAN. Lan connects to WAN. ISPs route traffic
 * Implications of multilayer protocols
 * Converged protocols - providing industrial controls, storage, voice, etc via Ethernet\(tcp/udp\)
