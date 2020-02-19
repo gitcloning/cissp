@@ -1,4 +1,4 @@
-theme: jekyll-theme-hacker
+theme: jekyll-theme-modernist
 plugins:
   - jekyll-mentions
   - jemoji
