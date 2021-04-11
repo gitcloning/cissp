@@ -1,0 +1,64 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+  
+    <title>materials on GeekBuilt ⭐ </title>
+    <link>https://geekbuilt.github.io/cissp/tags/materials/</link>
+    <description>Recent content in materials on GeekBuilt ⭐ </description>
+    <image>
+      <title>materials on GeekBuilt ⭐ </title>
+      <link>https://geekbuilt.github.io/cissp/tags/materials/</link>
+      <url>https://source.unsplash.com/collection/983219/1080x720</url>
+    </image>
+    <ttl>1440</ttl>
+    <generator>After Dark 9.2.3 (Hugo 0.80.0)</generator>
+    <language>en-US</language>
+    <copyright>Powered by  &lt;a target=&#34;_blank&#34; rel=&#34;external noopener license&#34; href=&#34;https://discourse.gohugo.io&#34;&gt;Hugo&lt;/a&gt;. </copyright>
+    <lastBuildDate>Sun, 11 Apr 2021 15:06:34 UT</lastBuildDate>
+    <atom:link href="https://geekbuilt.github.io/cissp/tags/materials/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CISSP Books, Videos, Notes and Study Guides for the CISSP Certification</title>
+      <link>https://geekbuilt.github.io/cissp/post/cissp-study/</link>
+      <pubDate>Sun, 11 Apr 2021 00:00:00 UT</pubDate>
+      <dc:creator> GeekBuilt ⭐️</dc:creator>
+      <guid>https://geekbuilt.github.io/cissp/post/cissp-study/</guid>
+      <description>CISSP 11 Hours.pdf  CISSP Practice Exams, Fifth Edition  (ISC)2 CISSP Certified Information Systems Security Professional Official Study Guide, 8e &amp;amp; CISSP Official (ISC)2 Practice Tests, 2e   (ISC)2 CISSP Certified Information Systems Security Professional Official Study Guide  CISSP Study Guide  The Official (ISC)2 Guide to the CISSP CBK Reference 
+Related FilesCISSP Acronym 2.4.pdf(898 kb)CISSP Cheat Sheet (CertMike).</description>
+      <category domain="https://geekbuilt.github.io/categories/cissp">Cissp</category>
+      <content:encoded><![CDATA[CISSP 11 Hours.pdf  CISSP Practice Exams, Fifth Edition  (ISC)2 CISSP Certified Information Systems Security Professional Official Study Guide, 8e &amp;amp; CISSP Official (ISC)2 Practice Tests, 2e   (ISC)2 CISSP Certified Information Systems Security Professional Official Study Guide  CISSP Study Guide  The Official (ISC)2 Guide to the CISSP CBK Reference 
+Related FilesCISSP Acronym 2.4.pdf(898 kb)CISSP Cheat Sheet (CertMike).pdf(304 kb)CISSP EXAMINATION PREPARATION EXPERIENCE (Sandeep Andhekar).pdf(503 kb)CISSP Mind Maps by Matheus.pdf(829 kb)CISSP PROCESS GUIDE (V.19 - 2018).pdf(2687 kb)How to Really Pass CISSP.pdf(690 kb)ISC2 Certification Preparation Kit.pdf(1368 kb)Information Security Leaders Handbook (By Rafeeq Rehman).pdf(2049 kb)Joshua&amp;#39;s CISSP Notes.pdf(117 kb)Memory Palace CISSP Notes (Prashant Mohan).pdf(4897 kb)Preparing for the General Data Protection Regulation (GDPR) - 12 steps to take now.pdf(539 kb)Quick Note On Cryptography From CISSP Exam Perspective.pdf(108 kb)Security&amp;#43; Notes.pdf(7714 kb)StudyNotes.pdf(2623 kb)Sun Flower - CISSP_Summary_V1.1.pdf(443 kb)Sun Flower CISSP Cram Study Guide 2017 (Amended by LUKE AHMED).pdf(2622 kb)The Memory Palace - A Quick Refresher For Your CISSP Exam.pdf(4897 kb)The Ultimate Guide to the CISSP.pdf(2031 kb)Video
+Complete CISSP Course 2019 by Sagar Bansal
+Other Resources
+CISSP Study Agenda and Resources 
+Disclaimer: Reference materials used belong to their respective authors, creators and are not my own. They are being used in accordance to fair use.]]></content:encoded>
+    </item>
+    <item>
+      <title>Study Guides for the CISSP Certification</title>
+      <link>https://geekbuilt.github.io/cissp/post/guides-and-notes/</link>
+      <pubDate>Sun, 11 Apr 2021 00:00:00 UT</pubDate>
+      <dc:creator> GeekBuilt ⭐️</dc:creator>
+      <guid>https://geekbuilt.github.io/cissp/post/guides-and-notes/</guid>
+      <description>This is study material for the 2018 CISSP Exam. There are links below to my notes on each domain, information about the exam, and other study tools.
+ Forked from Simon Owens and add some notes.  Why become a CISSP? • To broaden your current knowledge of security concepts and practices  • To demonstrate your expertise as a seasoned security professional  • To become more marketable in a competitive workforce  • To increase your salary and be eligible for more employment opportunities  • To bring improved security expertise to your current occupation  • To show a dedication to the security discipline</description>
+      <category domain="https://geekbuilt.github.io/categories/cissp">Cissp</category>
+      <content:encoded><![CDATA[This is study material for the 2018 CISSP Exam. There are links below to my notes on each domain, information about the exam, and other study tools.
+ Forked from Simon Owens and add some notes.  Why become a CISSP? • To broaden your current knowledge of security concepts and practices  • To demonstrate your expertise as a seasoned security professional  • To become more marketable in a competitive workforce  • To increase your salary and be eligible for more employment opportunities  • To bring improved security expertise to your current occupation  • To show a dedication to the security discipline 
+Domain Study Guides and Notes Related FilesGlossary.pdf(107 kb)d1-security-and-risk-management.pdf(83 kb)d2-asset-security.pdf(38 kb)d3-security-architecture-and-engineering.pdf(66 kb)d4-communication-and-network-security.pdf(45 kb)d5-identity-and-access-management.pdf(48 kb)d6-security-assessment-and-testing.pdf(55 kb)d7-security-operations.pdf(68 kb)d8-software-development-security.pdf(41 kb)general-tips.pdf(39 kb)tricky-definitions.pdf(51 kb)About the exam: Need 5 years expierence for certification. Get associate if less than that.
+3 hours
+100-150 Multiple Choice Questions
+70% to pass
+All domains 10-15% of score
+Official Information
+Practice Exams Cybervista  Techtarget  Networkasia  Grocertify-1 
+Study Tools: General Tips
+Free Government Training
+Book
+Video Course(cybrary)
+More Free Videos
+Video Questions
+Flash cards
+Review on Exam
+Learning how to learn. If you are going to spend 200 hours learning you might as well take 10 to do it right?
+]]></content:encoded>
+    </item>
+  </channel>
+</rss>

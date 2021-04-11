@@ -3,7 +3,7 @@ languageCode = "en-US" # Controls site language
 title = "GeekBuilt ⭐ "
 paginate = 6 # Number of posts to show before paginating
 copyright = "Powered by  <a target=\"_blank\" rel=\"external noopener license\" href=\"https://discourse.gohugo.io\">Hugo</a>. " # Optional, remove to suppress copyright notices
-
+publishDir = "./docs"
 # Controls default theme and theme components
 theme = [
   "fractal-forest", # OBSD
