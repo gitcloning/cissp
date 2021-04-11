@@ -1,4 +1,4 @@
-baseurl = "https://geekbuilt.github.io/cissp" # Controls base URL sitewide
+baseurl = "https://geekbuilt.github.io/cissp/" # Controls base URL sitewide
 languageCode = "en-US" # Controls site language
 title = "GeekBuilt ⭐ "
 paginate = 6 # Number of posts to show before paginating
