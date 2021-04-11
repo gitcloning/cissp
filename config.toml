@@ -24,8 +24,8 @@ footnoteReturnLinkContents = "↩" # Provides a nicer footnote return link
 
 [params]
   description = "CISSP Study Materials" # Suggested, controls default description meta
-  author = " GeekBuilt ⭐️" # Optional, controls author name display on posts
-  github = "https://github.com/geekbuilt"
+  author = " GitCloning ⭐️" # Optional, controls author name display on posts
+  github = "https://github.com/gitcloning"
   hide_author = false # Optional, set true to hide author name on posts
   disable_csp = false # Optional, set true to disable content security policy
   images = [
