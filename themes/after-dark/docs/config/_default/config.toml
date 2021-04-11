@@ -1,0 +1,63 @@
+#
+# Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+#
+# This file is part of After Dark.
+#
+# After Dark is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# After Dark is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+baseurl = "https://after-dark.habd.as/" # Controls base URL sitewide
+title = "After Dark" # Homepage title and page title suffix
+paginate = 40 # Number of items to show before paginating
+copyright = "Copyright &copy; Josh Habdas. Licensed under <a target=\"_blank\" rel=\"external noopener license\" href=\"https://www.gnu.org/licenses/agpl.html\">AGPL-3.0-or-later</a>."
+
+# Controls default theme and theme components
+theme = [
+  "after-dark" # AGPL-3.0-or-later
+]
+
+disableLiveReload = false # Optional, set true to disable live reload
+enableRobotsTXT = true # Suggested, enable robots.txt file
+sectionPagesMenu = "main" # Enable menu system for lazy bloggers
+
+[markup.goldmark.renderer]
+  unsafe = true # Optional, allows HTML inside your CommonMark content
+[markup.tableOfContents]
+  startLevel = 1 # Suggested, draws TOC using all heading levels
+  endLevel = 6 # Suggested, draws TOC using all heading levels
+[markup.highlight]
+  noClasses = false # Suggested, used for custom syntax highlighting
+
+[deployment]
+  order = [".mp4", ".gif$", ".png$", ".jpg$", ".bpg$", ".svg$"]
+
+[[deployment.targets]]
+  name = "s3-aws"
+  URL = "s3://after-dark.habd.as?region=us-east-1"
+  cloudFrontDistributionID = "E15C0TR21AL7CY"
+
+[[deployment.matchers]]
+  pattern = "^.+\\.(js|css|svg|ttf|woff|woff2|eot|png|gif|pdf)$"
+  cacheControl = "max-age=630720000, no-transform, public"
+  gzip = true
+
+[[deployment.matchers]]
+  pattern = "^.+\\.(mp4|jpg|jpeg|bpg)$"
+  cacheControl = "max-age=630720000, no-transform, public" # cache static assets for 20 years
+  gzip = false
+
+[[deployment.matchers]]
+  pattern = "^.+\\.(html|xml|json)$"
+  cacheControl = "max-age=300, no-transform, public" # cache output formats for 5 minutes
+  gzip = true

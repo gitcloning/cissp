@@ -1,0 +1,49 @@
+#
+# Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+#
+# This file is part of After Dark.
+#
+# After Dark is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# After Dark is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+[[main]]
+  name = "Overview"
+  weight = 1
+  identifier = "home"
+  url = "/"
+[[main]]
+  name = "Features"
+  weight = 2
+  identifier = "feature"
+  url = "/feature/"
+[[main]]
+  name = "Modules"
+  weight = 3
+  identifier = "module"
+  url = "/module/"
+[[main]]
+  name = "Shortcodes"
+  weight = 4
+  identifier = "shortcode"
+  url = "/shortcode/"
+[[main]]
+  name = "Extras"
+  weight = 5
+  identifier = "extra"
+  url = "/extra/"
+[[main]]
+  name = "Search"
+  weight = 6
+  identifier = "search"
+  url = "/search/"

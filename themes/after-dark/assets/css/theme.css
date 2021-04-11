@@ -1,0 +1,183 @@
+/*!
+ * Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+ *
+ * This file is part of After Dark.
+ *
+ * After Dark is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * After Dark is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+:root {
+  --screen-size-small: 30em; /* breakpoint reference only */
+}
+@keyframes intro {
+  0% { opacity: 0 } 100% { opacity: 1 }
+}
+.blur-up.lazyloading {
+  filter: blur(5px);
+  opacity: 1;
+  transition: opacity 1s, filter 1.5s;
+}
+.blur-up.lazyload {
+  opacity: 0;
+  filter: blur(10px);
+}
+.blur-up.lazyloaded {
+  filter: blur(0);
+  transition: filter 1s;
+}
+.hack .readmore {
+  margin-bottom: 2.2em;
+}
+.responsive-iframe,
+.ratio-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 = 56.25% = calc(9 / 16 * 100%) */
+  padding-top: 25px;
+  height: 0;
+}
+.responsive-iframe iframe,
+.ratio-container > *:not([itemprop="caption"]) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+iframe {
+  border: 0;
+}
+main, footer {
+  animation: intro 0.3s both;
+  animation-delay: 0.15s;
+}
+header:first-of-type + details {
+  margin: 20px 0;
+}
+footer time[datetime$="M"]:before {
+  content: "\2013\0020";
+}
+body > footer p.muted {
+  margin-bottom: 0;
+}
+@media only screen and (max-width: 768px) {
+  footer time[datetime$="M"] {
+    display: none;
+  }
+}
+blockquote cite {
+  display: block;
+}
+blockquote cite::before {
+   content: "\2014\00A0";
+}
+:target {
+  filter: brightness(1.2);
+}
+:disabled {
+  cursor: not-allowed;
+}
+/* hack.css overrides and enhancements */
+.hack li ul {
+  margin: 0;
+}
+.hack ol li {
+  padding-left: 27px;
+}
+.main {
+  padding: 20px 10px;
+}
+input.form-control {
+  border-radius: 0;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+}
+input.form-control,
+textarea.form-control,
+select.form-control,
+.help-block {
+  font-size: initial;
+}
+@media only screen and (max-width: 768px) {
+  .help-block {
+    font-size: unset;
+  }
+}
+html {
+  font-size: 13px;
+}
+.hack .form input,
+.hack .form textarea,
+.hack .form button,
+.hack .form label {
+  font-size: 1rem;
+}
+.hack .alert .highlight:first-of-type .chroma,
+.hack .card .highlight:first-of-type .chroma,
+.hack .alert pre:first-of-type,
+.hack .alert p:first-of-type,
+.hack .card pre:first-of-type,
+.hack .card p:first-of-type {
+  margin-top: unset;
+}
+.hack .alert .highlight:last-of-type .chroma,
+.hack .card .highlight:last-of-type .chroma,
+.hack .alert pre:last-of-type,
+.hack .alert p:last-of-type,
+.hack .card pre:last-of-type,
+.hack .card p:last-of-type {
+  margin-bottom: unset;
+}
+.hack blockquote,
+.hack blockquote:after {
+  line-height: 1.5;
+}
+.hack figure,
+.standard figure {
+  margin: unset;
+}
+.hack figure a {
+  border-bottom: none;
+}
+.hack figure a:hover {
+  background-color: inherit;
+}
+article header img {
+  width: 100%;
+  border-radius: 3px;
+}
+table td, table th {
+  line-height: inherit;
+}
+table a {
+  border-bottom: unset;
+}
+img {
+  max-width: 100%;
+}
+@media only screen and (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+  .container {
+    max-width: 50rem;
+  }
+}
+@media only screen and (min-width: 768px), (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  /* @see http://browserhacks.com/#hack-28f493d247a12ab654f6c3637f6978d5 */
+  html {
+    margin-left: calc(100vw - 100%); /* @see https://aykevl.nl/2014/09/fix-jumping-scrollbar */
+  }
+}

@@ -1,0 +1,66 @@
+#!/bin/sh
+
+#
+# Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+#
+# This file is part of After Dark.
+#
+# After Dark is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# After Dark is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+stop_help_server () {
+   echo "Stopping help server if running ..."
+   kill "$(ps aux | awk '/[h]ugo.*1414/ {print $2}')" 2>/dev/null || true
+}
+
+generate_help_docs () {
+   stop_help_server
+   echo "Generating help documentation ..."
+   THEME_PATH=themes/after-dark
+   meta_path="$THEME_PATH"/data/npm
+   mkdir -p "$meta_path" && echo "$LATEST_META" | tr '\r\n' ' ' > "$meta_path"/latest.json
+   cd "$THEME_PATH"/docs && mkdir themes && ln -s ../.. "$THEME_PATH"
+   hugo new validate.md --kind validate 1>/dev/null
+}
+
+update_module () {
+   meta_file=themes/"$1"/data/npm/latest.json
+   if [ -f "$meta_file" ] ; then
+      current_vers=$(sed -n 's/.*"version":"\([^"]*\).*/\1/p' < "$meta_file")
+   else
+      echo "Cannot detect version. Upgrade $1 anyway (y/n)? \c"
+      read -r answer
+      [ "$answer" = "${answer#[Yy]}" ] && exit 1
+   fi
+   LATEST_META=$(wget -qO - https://registry.npmjs.org/"$1"/latest)
+   latest_vers=$(echo "$LATEST_META" | grep -oE "\"version\".*[^,]*," | cut -d ',' -f1 | cut -d ':' -f2 | tr -d '" ')
+   if [ "$current_vers" ] ; then
+      if [ "$current_vers" = "$latest_vers" ] ; then
+         echo "Did not upgrade $1. Already using latest version." >&1; exit 0
+      else
+         echo "Upgrading $1 from $current_vers to $latest_vers ..."
+      fi
+   else
+      echo "Upgrading $1 from unknown version to $latest_vers ..."
+   fi
+   rm -rf themes/"$1"/* # maintains dotfiles, e.g. git and env
+   wget -qO - https://registry.npmjs.org/"$1"/-/"$1"-"$latest_vers".tgz | tar --strip-components=1 -xz -C themes/"$1"
+   echo "Version $latest_vers downloaded to themes/$1"
+   [ "$1" = "after-dark" ] && generate_help_docs
+   echo "Upgrade complete! Please see CHANGELOG.md for changes."
+}
+
+set -e
+
+update_module "after-dark"

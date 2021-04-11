@@ -1,0 +1,70 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/}}
+
+{{ define "title" -}}
+  {{ .Title }} | {{ .Site.Title }}
+{{- end }}
+{{ define "header" }}
+  {{ partial "masthead.html" . }}
+{{ end }}
+{{ define "main" }}
+  <header>
+    <h1>{{ .Title }}</h1>
+  </header>
+  <div id="search-app" v-cloak>
+    {{ with resources.Get "css/conditional/layouts/search.css" | minify }}
+      <style>{{ .Content | safeCSS }}</style>
+    {{ end }}
+    <section>
+      <form v-on:submit.prevent role="search" class="form" action="{{ "search" | absURL }}">
+        <fieldset class="form-group">
+          <input v-model="query" id="query" name="s" type="search" class="form-control" maxlength="32" autocomplete="off"{{ with .Params.form.input.placeholder }} placeholder="{{ . }}"{{ end }}{{ if eq .Params.form.input.disabled true }} disabled{{ end }}>
+          {{ with .Params.form.helpblock }}
+            <div class="help-block js-cloaked">{{ . | safeHTML }}</div>
+          {{ end }}
+          <div class="help-block js-initializing">{{/* placeholder */}}</div>
+        </fieldset>
+      </form>
+    </section>
+    <noscript>
+      <p>Cannot initialize. Search requires JavaScript to function.</p>
+    </noscript>
+    <section v-if="results.length" class="js-cloaked">
+      <p><i>Showing results for “{ resultsForSearch }”.</i></p>
+      <div id="search-results">
+        <article v-for="result in results" itemscope itemtype="https://schema.org/CreativeWork">
+          <header itemprop="name">
+            <h2 itemprop="name"><a :href="result.item.url">{ result.item.title }</a></h2>
+          </header>
+          <div v-html=result.item.summary itemprop="description"></div>
+          <nav class="readmore"><p><a itemprop="url" :href="result.item.url">Read More&nbsp;&raquo;</a></p></nav>
+        </article>
+      </div>
+    </section>
+  </div>
+{{ end }}
+{{ define "footer" }}
+  <small class="muted">
+    {{ partial "copyright-notice.html" . }}
+  </small>
+  {{ $script := resources.Get "/js/search.js" | resources.ExecuteAsTemplate "search.js" . }}
+  <script integrity="{{ printf "%s" ($script | resources.Fingerprint "sha512").Data.Integrity | safeHTML }}">
+    {{- $script.Content | safeJS -}}
+  </script>
+{{ end }}

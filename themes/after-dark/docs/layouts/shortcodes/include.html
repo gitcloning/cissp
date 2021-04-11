@@ -1,0 +1,41 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/ -}}
+
+<!-- {{/*
+Named attributes: "type", "file"
+Positional params: 0 {file}
+
+With base64-encoded inline image in markdown:
+![Theme screenshots](data:image/png;base64,{{< include type="image" file="themes/after-dark/images/docs/minimal-mac.png" >}})
+
+Combined with highlight shortcode for syntax highlighting:
+{{< highlight shell "linenos=inline" >}}
+{{< include "themes/after-dark/bin/install" >}}
+{{< /highlight >}}
+
+*/}} -->
+
+{{- $type := .Get "type" }}
+{{- $file := .Get "file" }}
+{{- if and .IsNamedParams }}
+  {{- if eq $type "image" }}{{ readFile $file | base64Encode }}{{ end -}}
+  {{- if eq $type "source" }}{{ readFile $file | safeHTML }}{{ end -}}
+{{ else }}
+  {{- readFile (.Get 0) | safeHTML -}}
+{{ end -}}

@@ -1,0 +1,17 @@
+{{ define "header" }}
+  {{ partial "masthead.html" . }}
+{{ end }}
+{{ define "main" }}
+  <header>
+    <h1>{{ .Title }}</h1>
+  </header>
+  {{ range .Paginator.Pages }}
+    {{ partial "page-summary.html" . }}
+  {{ end }}
+{{ end }}
+{{ define "footer" }}
+  <p>{{ partial "pagination.html" . }}</p>
+  <small class="muted">
+    {{ partial "copyright-notice.html" . }}
+  </small>
+{{ end }}

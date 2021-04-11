@@ -1,0 +1,72 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/ -}}
+
+{{ $custom := resources.Get "css/custom.css" }}
+{{ if eq .Site.Params.hackcss.disabled true }}
+  {{ with (slice $custom | resources.Concat "styles.css").Content }}
+    {{ if gt (len .) 0 }}
+      <style>{{ . | safeCSS }}</style>
+      {{ partial "meta/theme-color.html" . }}
+    {{ end }}
+  {{ end }}
+{{ else }}
+  {{ $hack := resources.Get "css/vendor/hack/hack.css" }}
+  {{ $standard := resources.Get "css/vendor/hack/standard.css" }}
+  {{ $dark := resources.Get "css/vendor/hack/dark.css" }}
+  {{ $darkgrey := resources.Get "css/vendor/hack/dark-grey.css" }}
+  {{ $solarizeddark := resources.Get "css/vendor/hack/solarized-dark.css" }}
+  {{ $theme := resources.Get "css/theme.css" | minify }}
+  {{ if eq .Site.Params.hackcss.palette "dark-grey" }}
+    {{ if eq .Site.Params.hackcss.mode "standard" }}
+      {{ with (slice $hack $standard $darkgrey $theme $custom | resources.Concat "styles.css").Content }}
+        <style>{{ . | safeCSS }}</style>
+        {{ partial "meta/theme-color.html" . }}
+      {{ end }}
+    {{ else }}
+      {{ with (slice $hack $darkgrey $theme $custom | resources.Concat "styles.css").Content }}
+        <style>{{ . | safeCSS }}</style>
+        {{ partial "meta/theme-color.html" . }}
+      {{ end }}
+    {{ end }}
+  {{ else if eq .Site.Params.hackcss.palette "solarized-dark" }}
+    {{ if eq .Site.Params.hackcss.mode "standard" }}
+      {{ with (slice $hack $standard $solarizeddark $theme $custom | resources.Concat "styles.css").Content }}
+        <style>{{ . | safeCSS }}</style>
+        {{ partial "meta/theme-color.html" . }}
+      {{ end }}
+    {{ else }}
+      {{ with (slice $hack $solarizeddark $theme $custom | resources.Concat "styles.css").Content }}
+        <style>{{ . | safeCSS }}</style>
+        {{ partial "meta/theme-color.html" . }}
+      {{ end }}
+    {{ end }}
+  {{ else }}
+    {{ if eq .Site.Params.hackcss.mode "standard" }}
+      {{ with (slice $hack $standard $dark $theme $custom | resources.Concat "styles.css").Content }}
+        <style>{{ . | safeCSS }}</style>
+        {{ partial "meta/theme-color.html" . }}
+      {{ end }}
+    {{ else }}
+      {{ with (slice $hack $dark $theme $custom | resources.Concat "styles.css").Content }}
+        <style>{{ . | safeCSS }}</style>
+        {{ partial "meta/theme-color.html" . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}

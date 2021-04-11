@@ -1,0 +1,34 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/ -}}
+
+<button
+  {{ with .id }}id="{{ . | urlize }}" {{ end }}
+  {{ with .name }}name="{{ . | safeURL }}" {{ end }}
+  {{ with .action }}formaction="{{ . | safeURL }}" {{ end }}
+  {{ with .form }}form="{{ . }}" {{ end }}
+  {{ with .value }}value="{{ . | safeHTMLAttr }}" {{ end }}
+  {{ with .target }}formtarget="{{ . }}" {{ end }}
+  {{ with .tabindex }}tabindex="{{ . }}" {{ end }}
+  {{ with .onclick }}onclick={{ . | safeJS }} {{ end }}
+  {{ if in (slice "true" "disabled") .disabled }}disabled {{ end }}
+  {{ if in (slice "get" "post") .method }}formmethod="{{ .method }}" {{ end }}
+  class="btn btn-{{ .type | default "default" }}{{ if eq .isghost "true" }} btn-ghost{{ end }}
+  {{- if eq .isblock "true" }} btn-block{{ end }}
+  {{- with .class }} {{ . }}{{ end }}"
+>{{ .body }}</button>

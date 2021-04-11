@@ -1,0 +1,60 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/}}
+
+{{ define "header" }}
+  {{ partial "masthead.html" . }}
+{{ end }}
+{{ define "main" }}
+  <header>
+    <h1>{{ .Title }}</h1>
+    {{ if .Description }}
+      <blockquote itemprop="description">{{ .Description }}</blockquote>
+    {{ end }}
+  </header>
+  <style>
+    .hack table th, .hack table td { vertical-align: middle; }
+    .hack table td img { margin-bottom: -7px; }
+  </style>
+  {{ .Content }}
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">{{ .Title | singularize }}</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <nav>
+        {{ $patinator := .Paginate (where .Pages ".Params.slug" "!=" nil) }}
+        {{ range $patinator.Pages }}
+          <tr>
+            <td><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
+            <td>{{ .Params.summary }}</td>
+          </tr>
+        {{ end }}
+      </nav>
+    </tbody>
+  </table>
+{{ end }}
+{{ define "footer" }}
+  <p>{{ partial "pagination.html" . }}</p>
+  <small class="muted">
+    {{ partial "copyright-notice.html" . }}
+  </small>
+{{ end }}

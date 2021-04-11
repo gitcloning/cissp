@@ -1,0 +1,53 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/ -}}
+
+<figure{{ with .class }} class="{{ . }}"{{ end }}>
+  {{ if .link }}
+    <a href="{{ .link }}"{{ if .linktarget }} target="{{ .linktarget }}"{{ end }}{{ if eq .linktarget "_blank" }} rel="external noopener noreferrer"{{ end }} itemprop="url">
+      {{- if .lqipsrc -}}
+        <img class="lazyload blur-up" src="{{ .lqipsrc }}" data-src="{{ .src }}" {{ if or .alt .caption }}alt="{{ with .alt }}{{ . }}{{ else }}{{ .caption }}{{ end }}"{{ end }} itemprop="image">
+      {{- else -}}
+        <img class="lazyload" data-src="{{ .src }}" {{ if or .alt .caption }}alt="{{ if .alt }}{{ .alt }}{{ else }}{{ .caption }}{{ end }}"{{ end }} itemprop="image">
+      {{- end -}}
+    </a>
+  {{ else }}
+    {{- if .lqipsrc -}}
+      <img class="lazyload blur-up" src="{{ .lqipsrc }}" data-src="{{ .src }}" {{ if or .alt .caption }}alt="{{ with .alt }}{{ . }}{{ else }}{{ .caption }}{{ end }}"{{ end }} itemprop="image">
+    {{- else -}}
+      <img class="lazyload" data-src="{{ .src }}" {{ if or .alt .caption }}alt="{{ if .alt }}{{ .alt }}{{ else }}{{ .caption }}{{ end }}"{{ end }} itemprop="image">
+    {{- end -}}
+  {{ end }}
+  {{ if or (or .title .caption) .attr }}
+    <figcaption>
+      {{ with .title }}
+        <header itemprop="name"><b>{{ . }}</b></header>
+      {{ end }}
+      {{ if or .caption .attr }}
+        <small>
+          <span itemprop="description">{{ .caption }}</span>
+          {{ if .attrlink }}
+            <a href="{{ .attrlink }}">
+              {{ .attr }}
+            </a>
+          {{ end }}
+        </small>
+      {{ end }}
+    </figcaption>
+  {{ end }}
+</figure>

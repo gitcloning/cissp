@@ -1,0 +1,35 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/ -}}
+
+{{ $defaults := .Site.Params.defaults.modules }}
+{{ $modules := .Site.Params.modules }}
+{{ if (or $modules $defaults) }}
+  {{ with $modules.fractal_forest }}
+    {{ partial "modules/fractal-forest/index.html" . }}
+  {{ end }}
+  {{ with $modules.hall_of_mirrors }}
+    {{ partial "modules/hall-of-mirrors/index.html" (dict "settings" . "page" $.Page) }}
+  {{ end }}
+  {{ with (default $defaults.toxic_swamp $modules.toxic_swamp) }}
+    {{ partial "modules/toxic-swamp/index.html" (dict "settings" . "data" $.Site.Data) }}
+  {{ end }}
+  {{ with $modules.voyeur }}
+    {{ partial "modules/voyeur/index.html" . }}
+  {{ end }}
+{{ end }}

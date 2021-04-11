@@ -1,0 +1,46 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/ -}}
+
+ul.thumbnail.grid {
+  margin: 10px -10px;
+}
+ul.thumbnail.grid li {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+ul.thumbnail.grid li h2 {
+  margin-bottom: 1rem;
+}
+ul.thumbnail.grid li a:hover figure {
+  filter: brightness(1.1);
+}
+ul.thumbnail.grid li a figure > img {
+  border-radius: 2px;
+}
+.hack ul.thumbnail.grid li h2::before {
+  content: initial;
+}
+.hack ul.thumbnail.grid li::after {
+  content: initial;
+}
+.standard ul.thumbnail.grid {
+  padding-left: 0px;
+  list-style-type: none;
+  display: flex;
+}

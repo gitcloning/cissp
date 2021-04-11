@@ -1,0 +1,40 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/ -}}
+
+{{ $_hugo_config := `{ "version": 1 }` }}
+{{ $href := .Get "href" | default nil -}}
+{{ $body := .Get "text" | default .Inner -}}
+{{ $class := .Get "class" -}}
+{{ $referrerpolicy := .Get "referrerpolicy" -}}
+{{ $target := .Get "target" -}}
+{{ $title := .Get "title" -}}
+{{ $type := .Get "type" -}}
+{{ $rel := .Get "rel" -}}
+{{ $itemtype := .Get "itemtype" -}}
+{{ $trusted := .Get "trusted" -}}
+{{- if .IsNamedParams -}}
+  {{ partial "components/external.html" (dict "href" $href "body" $body "class" $class "referrerpolicy" $referrerpolicy "target" $target "type" $type "title" $title "rel" $rel "itemtype" $itemtype "trusted" $trusted "suppress_external" (and .Inner (eq (len (findRE "external" $rel)) 0))) }}
+{{- else if gt (len .Params) 1 -}}
+  {{ partial "components/external.html" (dict "href" (.Get 0) "body" (.Get 1)) }}
+{{- else -}}
+  {{ partial "components/external.html" (dict "href" (.Get 0)) }}
+{{- end -}}
+{{- if or (and .IsNamedParams (eq $href nil)) (and (eq .IsNamedParams false) (eq (.Get 0) nil)) }}
+  <p>{{ partial "components/alert.html" (dict "type" "error" "body" (errorf "Invalid use of external shortcode. Please provide a URL.")) }}</p>
+{{ end -}}

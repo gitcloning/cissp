@@ -1,0 +1,23 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/ -}}
+
+{{ $permitted_attrs := .permitted_attrs | default (slice "id" "name" "class" "autocomplete" "autofocus" "disabled" "form" "formaction" "formmethod" "formnovalidate" "formtarget" "height" "max" "maxlength" "min" "minlength" "multiple" "pattern" "placeholder" "readonly" "required" "size" "spellcheck" "step" "tabindex" "type" "value" "width") }}
+{{ $boolean_attrs := .boolean_attrs | default (slice "autofocus" "disabled" "readonly" "required") }}
+{{ $validations := .validations | default (dict "type" (slice "email" "hidden" "number" "password" "search" "tel" "text" "url") "spellcheck" (slice "true" "default" "false") "autocomplete" (slice "off" "on" "name" "honorific-prefix" "given-name" "additional-name" "family-name" "honorific-suffix" "nickname" "email" "username" "new-password" "current-password" "organization-title" "organization" "street-address" "address-line1" "address-line2" "address-line3" "address-level4" "address-level3" "address-level2" "address-level1" "country" "country-name" "postal-code" "cc-name" "cc-given-name" "cc-additional-name" "cc-family-name" "cc-number" "cc-exp" "cc-exp-month" "cc-exp-year" "cc-csc" "cc-type" "transaction-currency" "transaction-amount" "language" "bday" "bday-day" "bday-month" "bday-year" "sex" "tel" "tel-country-code" "tel-national" "tel-area-code" "tel-local" "tel-extension" "email" "impp" "url" "photo")) }}
+<input {{ partial "components/snippets/textattrs.html" (dict "attrs" .attrs "permitted_attrs" $permitted_attrs "boolean_attrs" $boolean_attrs "validations" $validations) | safeHTMLAttr }}>

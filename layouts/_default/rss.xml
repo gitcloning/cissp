@@ -1,0 +1,34 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+  
+    <title>{{ if eq .Title .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }} on {{ end }}{{ .Site.Title }}{{ end }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>Recent content {{ if ne .Title .Site.Title }}{{ with .Title }}in {{ . }} {{ end }}{{ end }}on {{ .Site.Title }}</description>{{ range first 1 (default slice .Site.Params.images) }}
+    <image>
+      <title>{{ if eq $.Title $.Site.Title }}{{ $.Site.Title }}{{ else }}{{ with $.Title }}{{ . }} on {{ end }}{{ $.Site.Title }}{{ end }}</title>
+      <link>{{ $.Permalink }}</link>
+      <url>{{ . }}</url>
+    </image>{{ end }}
+    <ttl>1440</ttl>
+    <generator>{{ with .Site.Data.npm.latest }}{{ .name | humanize | title }} {{ .version }} (Hugo {{ hugo.Version }}){{ else }}Hugo {{ hugo.Version }}{{ end }}</generator>{{ with .Site.LanguageCode }}
+    <language>{{ . }}</language>{{ end }}{{ with .Site.Author }}
+    <managingEditor>{{ .email }}{{ with .name }} ({{ . }}){{ end }}</managingEditor>{{ end }}{{ with .Site.Author }}
+    <webMaster>{{ .email }}{{ with .name }} ({{ . }}){{ end }}</webMaster>{{ end }}{{ with .Site.Copyright }}
+    <copyright>{{ . }}</copyright>{{ end }}{{ if not now.IsZero }}
+    <lastBuildDate>{{ dateFormat "Mon, 02 Jan 2006 15:04:05" now.UTC | safeHTML }} UT</lastBuildDate>{{ end }}
+    {{ with .OutputFormats.Get "rss" -}}
+      {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+    {{- end }}{{ range .Pages }}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>{{ if not .PublishDate.IsZero }}
+      <pubDate>{{ dateFormat "Mon, 02 Jan 2006 15:04:05" .Date.UTC | safeHTML }} UT</pubDate>{{ end }}{{ if ne .Site.Params.hide_author true }}{{ if or (.Param "author") .Site.Author.email }}
+      <dc:creator>{{ default .Site.Author.email (.Param "author") }}{{ if and (not (.Param "author")) .Site.Author.name }} ({{ default (.Param "author") .Site.Author.name }}){{ end }}</dc:creator>{{ end }}{{ end }}
+      <guid>{{ .Permalink }}</guid>
+      <description>{{ .Summary | plainify }}</description>{{ range .Params.categories }}
+      <category domain="{{ printf "%s%s" ("/categories/" | absURL) (. | urlize ) }}">{{ . | title }}</category>{{ end }}{{ with .Resources.GetMatch "enclosure" }}{{ if .Params.length }}
+      <enclosure url="{{ .Permalink }}" length="{{ .Params.length }}" type="{{ .MediaType }}" />{{ end }}{{ end }}
+      <content:encoded>{{ "<![CDATA[" | safeHTML }}{{ .Content | plainify }}{{ "]]>" | safeHTML }}</content:encoded>
+    </item>{{ end }}
+  </channel>
+</rss>

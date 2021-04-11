@@ -1,0 +1,90 @@
+/*!
+ * Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+ *
+ * This file is part of After Dark.
+ *
+ * After Dark is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * After Dark is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+a[rel*="external"]::after {
+  content: " " url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20class='i-external'%20viewBox='0%200%2032%2032'%20width='14'%20height='14'%20fill='none'%20stroke='%23ff9800'%20stroke-linecap='round'%20stroke-linejoin='round'%20stroke-width='9.38%'%3E%3Cpath%20d='M14%209%20L3%209%203%2029%2023%2029%2023%2018%20M18%204%20L28%204%2028%2014%20M28%204%20L14%2018'/%3E%3C/svg%3E");
+}
+nav a.active {
+  background-color: inherit;
+  color: #0f0;
+}
+a[itemprop="url"] {
+  color: fuchsia;
+}
+a[itemprop="url"]:hover {
+  color: #fff;
+}
+.muted, .help-block {
+  opacity: 0.70;
+}
+.hack .muted,
+.hack .help-block {
+  color: #e0e0e0;
+}
+.hack > header {
+  display: grid;
+  grid-template-columns: 1fr minmax(min-content, auto);
+  column-gap: 20px;
+  grid-template-areas: "nav nav";
+}
+:root {
+  --trim-color: fus;
+}
+ul.thumbnail.grid li a:hover figure {
+  filter: initial;
+}
+ul.thumbnail.grid li a figure {
+  position: relative;
+  line-height: 0;
+  margin-bottom: 8px;
+}
+ul.thumbnail.grid li a:hover figure::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(0,0,0,0.1) 0,
+    rgba(0,0,0,0.3) 100%
+  );
+}
+ul.thumbnail.grid li a:hover figure {
+  filter: initial;
+}
+ul.thumbnail.grid li a figure {
+  position: relative;
+  line-height: 0;
+  margin-bottom: 8px;
+}
+ul.thumbnail.grid li a:hover figure::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(0,0,0,0.1) 0,
+    rgba(0,0,0,0.3) 100%
+  );
+}

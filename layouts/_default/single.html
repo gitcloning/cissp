@@ -1,0 +1,17 @@
+{{ define "title" -}}
+  {{ .Title }} | {{ .Site.Title }}
+{{- end }}
+{{ define "header" }}
+  {{ partial "masthead.html" . }}
+{{ end }}
+{{ define "main" }}
+  <header>
+    <h1>{{ .Title }}</h1>
+  </header>
+  {{ .Content }}
+{{ end }}
+{{ define "footer" }}
+  <small class="muted">
+    {{ partial "copyright-notice.html" . }}
+  </small>
+{{ end }}

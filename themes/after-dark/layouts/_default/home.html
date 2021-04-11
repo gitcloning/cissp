@@ -1,0 +1,77 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/}}
+
+{{ define "title" -}}
+  {{ .Site.Title }}
+{{- end }}
+{{ define "header" }}
+  {{ partial "masthead.html" . }}
+{{ end }}
+{{ define "main" }}
+  <header>
+    <h1 itemprop="name">{{ .Title }}</h1>
+  </header>
+  {{ with .Site.Params.layout.home.section }}
+    {{ if ne $.Site.Params.hackcss.disabled true }}
+      {{ with resources.Get "css/conditional/layouts/partials/page-thumbs.css" | minify }}
+        <style>{{ .Content | safeCSS }}</style>
+      {{ end }}
+    {{ end }}
+    {{ range sort . "weight" "asc" }}
+      <section>
+        {{ $index := site.GetPage "section" .type }}
+        {{ $pages := where site.RegularPages "Type" .type }}
+        {{ $page_count := (default 1 (len $pages)) }}
+        {{ if eq $page_count 1 }}
+          {{ partial "page-summary.html" $index }}
+        {{ else if gt $page_count 1 }}
+          <header>
+            <h1 itemprop="name">
+              <a href="{{ $index.RelPermalink }}">Recent {{ $index.Title }}</a>
+            </h1>
+            <blockquote itemprop="description">{{ $index.Description }}</blockquote>
+          </header>
+          {{ partial "page-thumbs.html" (dict "thumbnail_options" .thumbs "page_count" $page_count "limit" .limit "pages" $pages) }}
+        {{ end }}
+        {{ if and (lt .limit $page_count) (ne 1 $page_count) }}
+          <nav class="readmore">
+            <a itemprop="url" href="{{ $index.RelPermalink }}">
+              View more {{ $index.Title }}
+            </a>
+          </nav>
+        {{ end }}
+      </section>
+    {{ end }}
+  {{ end }}
+  {{ if not .Site.Params.layout.home.hide_blog }}
+    <section itemscope itemtype="https://schema.org/Blog">
+      {{ range (.Paginate (where .Site.RegularPages "Type" "in" (site.Params.layout.homepage.sections | default (slice "post")))).Pages }}
+        {{ partial "page-summary.html" . }}
+      {{ end }}
+    </section>
+  {{ end }}
+{{ end }}
+{{ define "footer" }}
+  {{ if not .Site.Params.layout.home.hide_blog }}
+    <p>{{ partial "pagination.html" . }}</p>
+  {{ end }}
+  <small class="muted">
+    {{ partial "copyright-notice.html" . }}
+  </small>
+{{ end }}

@@ -1,0 +1,88 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/ -}}
+
+<!doctype html>
+<html lang="{{ .Site.LanguageCode }}">
+  <head>
+    {{ partial "meta/content-security-policy.html" . }}
+    <meta name="generator" content="After Dark Hugo">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ block "title" . }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
+    <meta name="keywords" content="{{ if .Keywords }}{{ delimit .Keywords ", " }}{{ else if and .IsPage .Params.tags }}{{ delimit .Params.tags ", " }}{{ else }}{{ range $term, $val := .Site.Taxonomies.categories }}{{ lower (humanize $term) }}, {{ end }}{{ end }}">
+    {{ $default_noindex_kinds := slice "section" "taxonomy" "taxonomyTerm" }}
+    {{ $noindex_kinds := .Site.Params.noindex_kinds | default $default_noindex_kinds }}
+    {{ $is_noindex_true := and (isset .Params "noindex") .Params.noindex }}
+    {{ if or (in $noindex_kinds .Kind) ($is_noindex_true) }}
+      <meta name="robots" content="noindex">
+    {{ end }}
+    {{ template "_internal/opengraph.html" . }}
+    {{ template "_internal/twitter_cards.html" . }}
+    {{ partial "meta/ogimage-maybe.html" . }}
+    {{ partial "meta/telegram-channel-maybe.html" . }}
+    {{ if eq .Kind "home" }}
+      {{ partial "meta/verifications.html" . }}
+    {{ end }}
+    {{ partial "meta/http-referrer.html" . }}
+    {{ $import := resources.Get "/js/vendor/fetch-inject.min.js" }}
+    {{ $baseof := resources.Get "/js/baseof.js" | resources.ExecuteAsTemplate "baseof.js" . }}
+    <script integrity="{{ ($import | resources.Fingerprint "sha512").Data.Integrity }}">
+      {{- $import.Content | safeJS -}}
+    </script>
+    <script integrity="{{ ($baseof | resources.Fingerprint "sha512").Data.Integrity }}">
+      {{- $baseof.Content | safeJS -}}
+    </script>
+    {{ partial "head/modules.html" . }}
+    {{ with .OutputFormats.Get "rss" }}
+      {{ printf "<link rel=\"%s\" type=\"%s\" href=\"%s\" title=\"%s\">" .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ end }}
+    <link rel="canonical" href="{{ .Permalink }}">
+    {{ if (isset .Params "prev") }}
+      <link rel="prev" href="{{ .Params.prev }}">
+    {{ end }}
+    {{ if (isset .Params "next") }}
+      <link rel="next" href="{{ .Params.next }}">
+    {{ end }}
+    {{ partial "head/favicon.html" . }}
+    {{ partial "global-styles.html" . }}
+    {{ $highlights := findRE "class\\s*?=\\s*?\".*?\\bhighlight\\b.*?\"|class\\s*?=\\s*?highlight\\b" .Content }}
+    {{ if ge (len $highlights) 1 }}
+      <script integrity="sha512-ISTAV0GadOIz/NXXHOS+eCM0ysXVVHhQTlvA6LJxz/DeA5yIxm0Vqf5IE+WH0yuuXkayAKtoZkQ326nch5f/fg==">fetchInject([{{ "/css/syntax.css" | relURL }}]);</script>
+      <noscript>
+        <link href="{{ "/css/syntax.css" | relURL }}" rel="stylesheet">
+      </noscript>
+    {{ end }}
+  </head>
+  {{ $hackcss_disabled := .Site.Params.hackcss.disabled | default false }}
+  {{ $hackcss_mode := .Site.Params.hackcss.mode | default "hack" }}
+  {{ $hackcss_palette := .Site.Params.hackcss.palette | default "dark" }}
+  <body class="{{ if ne $hackcss_disabled true }}{{ $hackcss_mode }} {{ $hackcss_palette }} main container{{ end }}">
+    <header>{{ block "header" . }}{{ end }}</header>
+    <main>{{ block "main" . }}{{ end }}</main>
+    <footer>{{ block "footer" . }}{{ end }}</footer>
+    {{ $defaults := .Site.Params.defaults.modules }}
+    {{ $modules := .Site.Params.modules }}
+    {{ if (or $modules $defaults) }}
+      {{ with (default $defaults.toxic_swamp $modules.toxic_swamp) }}
+        {{ partial "modules/toxic-swamp/toolbar.html" dict }}
+      {{ end }}
+    {{ end }}
+  </body>
+</html>

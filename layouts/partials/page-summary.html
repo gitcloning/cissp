@@ -1,0 +1,51 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/ -}}
+
+{{ $page_schema := .Params.schema }}
+{{ $section_schema := (.Site.GetPage "section" .Page.Type).Params.schema }}
+{{ $schema_type := (default $section_schema.type $page_schema.type) | default "Thing" }}
+{{ $article_types := .Site.Data.schema.article_types }}
+{{ $is_typeof_article := in $article_types $schema_type }}
+<article itemprop="citation{{ if eq $schema_type "BlogPosting" }} blogPost{{ end }}" itemscope itemtype="https://schema.org/{{ $schema_type }}" id="{{ .Title | anchorize }}">
+  <header>
+    <h1 itemprop="{{ if $is_typeof_article }}headline{{ else }}name{{ end }}">
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </h1>
+    {{ if eq .Type "post" }}
+      <p class="muted">{{ partial "post/meta.html" . }}</p>
+    {{ end }}
+    {{ if .Description }}
+      <blockquote itemprop="headline">{{ .Description }}</blockquote>
+    {{ end }}
+  </header>
+  <div itemprop="{{ if $is_typeof_article }}articleBody mainEntityOfPage{{ end }}">
+    {{- .Summary -}}
+  </div>
+  <meta itemprop="inLanguage" content="{{ .Site.LanguageCode }}">
+  <meta itemprop="datePublished" content="{{ dateFormat "2006-01-02T15:04:05-07:00" (default .Date (.PublishDate)) }}">
+  <meta itemprop="dateModified" content="{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }}">
+  {{ with .Params.images }}
+    <meta itemprop="image" content="{{ index . 0 }}">
+  {{ end }}
+</article>
+{{ if .Truncated }}
+  <nav class="readmore">
+    <a itemprop="url" href="{{ .RelPermalink }}">Read More&nbsp;&raquo;</a>
+  </nav>
+{{ end }}

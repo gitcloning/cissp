@@ -1,0 +1,81 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/}}
+
+{{ with $.Resources.GetMatch "*header*" }}
+  {{ $meta_sameas := .Params.meta.sameas }}
+  {{ $meta_license := .Params.meta.license }}
+  {{ $meta_creator := .Params.meta.creator }}
+  {{ $meta_description := .Params.meta.description }}
+  {{ $meta_keywords := .Params.meta.keywords }}
+  {{ $meta_contentlocation := .Params.meta.contentlocation }}
+  {{ $image300 := .Fill "300x169 q20 Center" }}
+  {{ $image600 := .Fill "600x338 q60 Center" }}
+  {{ $image900 := .Fill "900x506 q70 Center" }}
+  {{ $image1200 := .Fill "1200x675 q80 Center" }}
+  {{ $image1600 := .Fill "1600x900 q90 Center" }}
+  <figure class="ratio-container" aria-hidden="true" itemscope itemtype="https://schema.org/ImageObject">
+    <link itemprop="contentUrl" href="{{ .RelPermalink }}">
+    <meta itemprop="encodingFormat" content="{{ .MediaType }}">
+    <meta itemprop="name" content="{{ .Name | plainify }}">
+    {{ if (urls.Parse $meta_sameas).Host }}
+      <link itemprop="sameAs" href="{{ $meta_sameas }}">
+    {{ end }}
+    {{ if (urls.Parse $meta_license).Host }}
+      <link itemprop="license" href="{{ $meta_license }}">
+    {{ end }}
+    {{ with $meta_keywords }}
+      <meta itemprop="keywords" content="{{ delimit . ", " }}">
+    {{ end }}
+    {{ with $meta_contentlocation }}
+      <meta itemprop="contentLocation" content="{{ . | plainify }}">
+    {{ end }}
+    {{ with $meta_description }}
+      <meta itemprop="description" content="{{ . | plainify }}">
+    {{ end }}
+    <img
+      itemprop="thumbnailUrl"
+      alt="{{ with $meta_description }}{{ . }}{{ else }}{{ .Name | plainify }}{{ end }}"
+      class="lazyload blur-up"
+      src="{{ $image600.RelPermalink }}"
+      srcset="{{ $image300.RelPermalink }}"
+      data-srcset="{{ $image300.RelPermalink }} 300w, {{ $image600.RelPermalink }} 600w, {{ $image900.RelPermalink }} 900w, {{ $image1200.RelPermalink }} 1200w, {{ $image1600.RelPermalink }} 1600w"
+      data-sizes="auto"
+    >
+    {{ if or (not (path.Ext .Title)) (or $meta_creator $meta_sameas) }}
+      <figcaption itemprop="caption">
+        {{ if not (path.Ext .Title) }}
+          <span itemprop="headline">{{ .Title | plainify }}</span>.
+        {{ end }}
+        {{ if or $meta_creator $meta_sameas }}
+          Photo
+          {{ if $meta_creator }}
+            by
+            <span itemprop="creator">
+              {{ $meta_creator | plainify -}}
+            </span>
+          {{- end }}
+          {{- with (urls.Parse $meta_sameas).Host }}
+            on
+            {{ (strings.TrimSuffix (path.Ext .) .) | title }}
+          {{- end }}.
+        {{ end }}
+      </figcaption>
+    {{ end }}
+  </figure>
+{{ end }}

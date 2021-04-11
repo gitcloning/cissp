@@ -1,0 +1,42 @@
+{
+  "name": "fractal-forest",
+  "version": "2.0.0",
+  "description": "Better Portable Graphics module for After Dark.",
+  "author": "Josh Habdas <jhabdas@protonmail.com>",
+  "homepage": "https://after-dark.habd.as/module/fractal-forest/",
+  "standard-version": {
+    "scripts": {
+      "posttag": "git tag --sign $(git describe --tags $(git rev-list --tags --max-count=1)) $(git describe --tags $(git rev-list --tags --max-count=1))^{} -f -m \"$(git log -1 --pretty=%B)\" -m \"-----BEGIN DIST INTEGRITY-----\" -m \"$(npm pack --dry-run --json . | grep integrity | cut -d ',' -f1 | cut -d ':' -f2 | tr -d '\" ')\" -m \"-----END DIST INTEGRITY-----\""
+    }
+  },
+  "scripts": {
+    "test": "while true; do head -n 100 /dev/urandom; sleep 0.1; done | hexdump -C | grep 'ca fe'",
+    "release": "standard-version",
+    "commit": "npx git-cz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.habd.as/comfusion/fractal-forest.git"
+  },
+  "keywords": [
+    "docker",
+    "hugo",
+    "wasm",
+    "bpg",
+    "asmjs"
+  ],
+  "devDependencies": {
+    "commitizen": "^3.1.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "standard-version": "^6.0.1"
+  },
+  "peerDependencies": {
+    "after-dark": ">= 5.1.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "license": "0BSD"
+}

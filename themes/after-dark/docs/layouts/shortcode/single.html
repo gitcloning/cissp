@@ -1,0 +1,68 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/}}
+
+{{ define "title" -}}
+  {{ .Title }} | {{ .Site.Title }}
+{{- end }}
+{{ define "header" }}
+  {{ partial "masthead.html" . }}
+{{ end }}
+{{ define "main" }}
+  <header>
+    <h1>{{ .Title }}</h1>
+    {{ if .Description }}
+      <blockquote itemprop="description">{{ .Description }}</blockquote>
+    {{ end }}
+  </header>
+  <style>
+    dt, dd { display: inline; margin-left: 0; }
+  </style>
+  {{ with .Params.html_attributes }}
+    <div><dt><b>HTML attributes:</b> {{ delimit (apply (apply (sort .) "partial" "definition-data.html" ".") "chomp" ".") ", " }}</div>
+  {{ else }}
+    <div><dt><b>HTML attributes:</b> <dd>None available</div>
+  {{ end }}
+  </table>
+  {{ with .Params.custom_attributes }}
+    <div><dt><b>Custom attributes:</b> {{ delimit (apply (apply (sort .) "partial" "definition-data.html" ".") "chomp" ".") ", " }}</div>
+  {{ else }}
+    <div><dt><b>Custom attributes:</b>  <dd>None available</div>
+  {{ end }}
+  {{ .Content }}
+  <footer>
+    <hr>
+    <p>
+      Published
+      {{ with .Params.categories }}
+        in <span itemprop="articleSection">{{ delimit (apply (apply (sort .) "partial" "category-link.html" ".") "chomp" ".") ", " " and " }}</span>
+      {{ end }}
+      {{ with .Params.snippets_used }}
+        using {{ delimit (apply (apply (sort .) "partial" "shortcode-link.html" ".") "chomp" ".") ", " " and " }} shortcodes.
+      {{ else }}
+        and used alone.
+      {{ end }}
+    </p>
+    {{ partial "post/related-content.html" . }}
+  </footer>
+{{ end }}
+{{ define "footer" }}
+  <small class="muted">
+    {{ partial "copyright-notice.html" . }}
+  </small>
+{{ end }}

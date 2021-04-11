@@ -1,0 +1,71 @@
+#
+# Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+#
+# This file is part of After Dark.
+#
+# After Dark is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# After Dark is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+# DOCKER-VERSION 19.03.1-ce, build 74b1e89e8a
+# COMPOSE-VERSION 1.24.1
+
+# HOW TO USE THIS FILE
+#
+# 1. Install Docker and Docker Compose on a host machine
+# 2. Copy `Dockerfile` and `docker-compose.yml` to directory of choice
+# 3. Run `docker build .` to build after-dark image
+# 4. Run `mkdir -p site/content` to contain your config and site content
+# 5. Create a temporary container to copy site config and welcome post from container to host
+#    ```
+#    docker create -it --name temp $(docker images -q | head -n 1) sh && \
+#    docker cp temp:/opt/after-dark/config.toml ./site && \
+#    docker cp temp:/opt/after-dark/content/post/ ./site/content/ && \
+#    docker rm -fv temp
+#    ```
+# 6. Add a rule to your hosts file like: `127.0.0.1 after-dark.local` to match traefik label
+# 7. Bring the stack up with `docker-compose up -d` then check state with `docker-compose ps`
+# 8. If both traefik and web services are up navigate to http://after-dark.local in a browser
+# 9. Make a change to the site config for content and watch the page reload with the updates
+
+version: "3.7"
+services:
+
+  traefik:
+    image: traefik:v2.0.0
+    command:
+      # - "--log.level=DEBUG"
+      # - "--api.insecure=true"
+      - "--global.checkNewVersion=false"
+      - "--global.sendAnonymousUsage=false"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      # - "8080:8080" # Traefik Web UI (enabled by --api.insecure)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro # So that Traefik can listen to the Docker events
+      # - ./traefik.toml:/etc/traefik/traefik.toml # Start using config
+
+  web:
+    build: .
+    expose:
+      - "80"
+    volumes:
+      - ./site/content:/opt/after-dark/content/:ro
+      - ./site/config.toml:/opt/after-dark/config.toml:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.after-dark.entrypoints=web
+      - traefik.http.routers.after-dark.rule=Host(`after-dark.local`)

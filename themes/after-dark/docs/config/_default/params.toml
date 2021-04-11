@@ -1,0 +1,63 @@
+#
+# Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+#
+# This file is part of After Dark.
+#
+# After Dark is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# After Dark is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+description = "After Dark is free and open-source software you can use to create a website, blog or app." # Suggested, controls default description meta
+author = "Josh Habdas" # Optional, controls author name display on posts
+hide_author = true # Optional, set true to suppress author name on posts
+has_cookies = false # Optional, set true to disable cookie disclaimer
+disable_csp = true # Optional, set true to disable content security policy
+images = [
+  "https://after-dark.habd.as/images/screenshots/after-dark-v6.15.0-homepage-fs8.png"
+] # Suggested, controls default Open Graph images
+
+[layout.menu.main]
+  hidden = false # Optional, set false or remove to show section menu
+
+[security.csp.directives]
+  workerSrc = [
+    "'self'",
+    "blob:"
+  ]
+  connectSrc = [
+    "'self'",
+    "wss:",
+    "data:"
+  ]
+  mediaSrc = [
+    "https://*.habd.as"
+  ]
+  imgSrc = [
+    "'self'",
+    "data:",
+    "https://*.unsplash.com"
+  ]
+  scriptSrc = [
+    "'self'",
+    "'unsafe-inline'",
+    "'unsafe-eval'",
+    "https:",
+    "'sha512-2t0yyNrUdtn9WGIoBVxq5vtoJQYfoDQDbqRPpOb75f1hiL39DGLdJKDrGP60fBhXfrFeKyVhzWJvHvLgln/ElA=='",
+    "'sha512-hno7WeTIciCJSjg/myjyK30HYkrcGCVwo4g4SpUalvrs3r2lS7bPNIQwbCNypKbg7BZ1sA4AsGnk6Gq4NOKpGA=='",
+    "'sha512-ISTAV0GadOIz/NXXHOS&#43;eCM0ysXVVHhQTlvA6LJxz/DeA5yIxm0Vqf5IE&#43;WH0yuuXkayAKtoZkQ326nch5f/fg=='",
+    "'sha512-/uSbYvALRP8DT0ll9zazZRCrY2NZuNudmKGLZF0AjiwYn7xJxM8dGpnaszOca4opMlgpVBgRh5tdAqxQCQ0qrA=='",
+    "'strict-dynamic'"
+  ]
+
+[seo.webmaster_verifications]
+  yandex = "4006a8813cbb9fdb" # https://webmaster.yandex.com/

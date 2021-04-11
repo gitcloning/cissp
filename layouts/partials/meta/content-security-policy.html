@@ -1,0 +1,60 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/ -}}
+
+{{ $is_disabled := .Param "disable_csp" }}
+{{ $site_directives := .Site.Params.security.csp.directives }}
+{{ if and $site_directives (ne $is_disabled true) }}
+  {{ if ge (len $site_directives) 1 }}
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src{{ if $site_directives.defaultsrc }}
+        {{- range $site_directives.defaultsrc }} {{ . | safeHTML }}{{ end -}}
+        {{- range .Params.security.csp.directives.defaultsrc }} {{ . | safeHTML }}{{ end -}}
+      {{ else }} 'none'{{ end }};connect-src{{ if $site_directives.connectsrc }}
+        {{- range $site_directives.connectsrc }} {{ . | safeHTML }}{{ end -}}
+        {{- range .Params.security.csp.directives.connectsrc }} {{ . | safeHTML }}{{ end -}}
+      {{ else }} 'self'{{ end }};worker-src{{ if $site_directives.workersrc }}
+        {{- range $site_directives.workersrc }} {{ . | safeHTML }}{{ end -}}
+        {{- range .Params.security.csp.directives.workersrc }} {{ . | safeHTML }}{{ end -}}
+      {{ else }} 'self'{{ end }};font-src{{ if $site_directives.fontsrc }}
+        {{- range $site_directives.fontsrc }} {{ . | safeHTML }}{{ end -}}
+        {{- range .Params.security.csp.directives.fontsrc }} {{ . | safeHTML }}{{ end -}}
+      {{ else }} 'self'{{ end }};media-src{{ if $site_directives.mediasrc }}
+        {{- range $site_directives.mediasrc }} {{ . | safeHTML }}{{ end -}}
+        {{- range .Params.security.csp.directives.mediasrc }} {{ . | safeHTML }}{{ end -}}
+      {{ else }} 'self'{{ end }};img-src{{ if $site_directives.imgsrc }}
+        {{- range $site_directives.imgsrc }} {{ . | safeHTML }}{{ end -}}
+        {{- range .Params.security.csp.directives.imgsrc }} {{ . | safeHTML }}{{ end -}}
+      {{ else }} 'self' data:{{ end }};script-src{{ if $site_directives.scriptsrc }}
+        {{- range $site_directives.scriptsrc }} {{ . | safeHTML }}{{ end -}}
+        {{- range .Params.security.csp.directives.scriptsrc }} {{ . | safeHTML }} {{ end -}}
+      {{ else }} 'none'{{ end }};style-src{{ if $site_directives.stylesrc }}
+        {{- range $site_directives.stylesrc }} {{ . | safeHTML }}{{ end -}}
+        {{- range .Params.security.csp.directives.stylesrc }} {{ . | safeHTML }} {{ end -}}
+      {{ else }} 'self' 'unsafe-inline'{{ end }};frame-src{{ if $site_directives.framesrc }}
+        {{- range $site_directives.framesrc }} {{ . | safeHTML }}{{ end -}}
+        {{- range .Params.security.csp.directives.framesrc }} {{ . | safeHTML }} {{ end -}}
+      {{ else }} 'self'{{ end }};object-src{{ if $site_directives.objectsrc }}
+        {{- range $site_directives.objectsrc }} {{ . | safeHTML }}{{ end -}}
+        {{- range .Params.security.csp.directives.objectsrc }} {{ . | safeHTML }} {{ end -}}
+      {{ else }} 'none'{{ end }};">
+  {{ end }}
+{{ else if not $is_disabled }}
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval'; worker-src 'self' blob:; connect-src 'self' wss: data:; font-src 'self' https: data:; img-src 'self' https: data:; object-src 'none'">
+{{ end }}

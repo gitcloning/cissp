@@ -1,0 +1,52 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/ -}}
+
+{{ $path := (path.Base .node.RelPermalink) }}
+{{ $is_src_relative := not (urls.Parse .src).Host }}
+{{ $has_poster := ne .poster nil }}
+{{ $is_poster_relative := not (urls.Parse .poster).Host }}
+
+<video
+  class="lazyload{{ with .class }} {{ . }}{{ end }}"
+  {{ with .autoplay }} autoplay{{ end }}
+  {{ with .controls }} controls{{ end }}
+  {{ with .crossorigin }}crossorigin="{{ . }}"{{ end }}
+  {{ with .height }} height="{{ . }}"{{ end }}
+  {{ with .loop }} loop{{ end }}
+  {{ with .muted }} muted{{ end }}
+  {{ with .playsinline }} {{ . }}{{ end }}
+  {{ with .preload }} preload="{{ . }}"{{ end }}
+  {{ with .intrinsicsize }} intrinsicsize="{{ . }}"{{ end }}
+  {{ if $has_poster }}
+    {{ if $is_poster_relative -}}
+      poster="{{ relref .node $path }}{{ .poster }}"
+    {{- else }}
+      poster="{{ .poster }}"
+    {{ end }}
+  {{ end }}
+  {{ with .poster }} poster="{{ . }}"{{ end }}
+  {{ if $is_src_relative -}}
+    src="{{ relref .node $path }}{{ .src }}"
+  {{- else -}}
+    src="{{ .src }}"
+  {{- end }}
+  {{ with .width }} width="{{ . }}"{{ end }}
+>
+  Your browser doesn't support HTML5 video. <a href="{{ if .is_src_relative }}{{ relref .node $path }}{{ .src }}{{ else }}{{ .src }}{{ end }}">Download video</a> instead.
+</video>

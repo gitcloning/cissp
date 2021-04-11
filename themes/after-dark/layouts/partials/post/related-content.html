@@ -1,0 +1,44 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/ -}}
+
+{{ $limit := (index .Site.Params.layout .Type).related.limit | default .Site.Params.related_content_limit }}
+{{ $pages := .Site.RegularPages.Related . | first (default 7 $limit) }}
+{{ $page_count := len $pages }}
+{{ if and (gt $page_count 1) (ne $limit 0) }}
+  {{ with $pages }}
+    <aside>
+      <header>Related Content</header>
+      {{ with (index $.Site.Params.layout $.Type).related }}
+        {{ if ne $.Site.Params.hackcss.disabled true }}
+          {{ with resources.Get "css/conditional/layouts/partials/page-thumbs.css" | minify }}
+            <style>{{ .Content | safeCSS }}</style>
+          {{ end }}
+        {{ end }}
+        {{ partial "page-thumbs.html" (dict "thumbnail_options" .thumbs "page_count" $page_count "limit" $limit "pages" $pages "show_readingtime" true) }}
+      {{ else }}
+        <ul>
+          {{ range . }}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            <time class="muted" datetime="{{ .ReadingTime }}M">{{ .ReadingTime }} minutes</time>
+          {{ end }}
+        </ul>
+      {{ end }}
+    </aside>
+  {{ end }}
+{{ end }}

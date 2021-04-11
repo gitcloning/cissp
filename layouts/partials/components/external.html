@@ -1,0 +1,22 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/ -}}
+
+{{- /**/ -}}
+<a {{ with .itemtype }} itemprop itemtype="https://schema.org/{{ . }}"{{ end }} target="{{ .target | default "_blank" }}"{{ with .type }} type="{{ . }}"{{ end }}{{ with .title }} title="{{ . }}"{{ end }}{{ with .rel }} rel="{{ . }}"{{ else }} rel="{{ if ne .supress_external true }}external{{ end }} noopener"{{ end }}{{ if eq .trusted "true" }} href="{{ .href | safeURL }}"{{ else }} href="{{ .href }}"{{ end }}{{ with .referrerpolicy }} referrerpolicy="{{ . }}"{{ end }}{{ with .class }} class="{{ . }}"{{ end }}>{{ .body | default (replaceRE "^https?://(.*)" "$1" .href) }}</a>
+{{- /**/ -}}

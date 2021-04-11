@@ -1,0 +1,16 @@
+{{ define "header" }}
+  {{ partial "masthead.html" . }}
+{{ end }}
+{{ define "main" }}
+  <header>
+    <h1>{{ .Title }}</h1>
+  </header>
+  <ul>
+    {{ range $key, $value := .Data.Terms }}
+      <li><a href="{{ $key | urlize }}">{{ $key }}</a> ({{ len $value }})
+    {{ end }}
+  </ul>
+{{ end }}
+{{ define "footer" }}
+  {{ partial "copyright-notice.html" . }}
+{{ end }}

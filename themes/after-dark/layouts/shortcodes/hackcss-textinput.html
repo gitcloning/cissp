@@ -1,0 +1,50 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/ -}}
+
+{{ $id := .Get "id" | default nil }}
+{{ $name := .Get "name" | default nil }}
+{{ $class := .Get "class" | default nil }}
+{{ $autocomplete := .Get "autocomplete" | default nil }}
+{{ $autofocus := .Get "autofocus" | default nil }}
+{{ $disabled := .Get "disabled" | default nil }}
+{{ $form := .Get "form" | default nil }}
+{{ $formaction := .Get "formaction" | default nil }}
+{{ $formmethod := .Get "formmethod" | default nil }}
+{{ $formtarget := .Get "formtarget" | default nil }}
+{{ $height := .Get "height" | default nil }}
+{{ $max := .Get "max" | default nil }}
+{{ $maxlength := .Get "maxlength" | default nil }}
+{{ $min := .Get "min" | default nil }}
+{{ $minlength := .Get "minlength" | default nil }}
+{{ $multiple := .Get "multiple" | default nil }}
+{{ $pattern := .Get "pattern" | default nil }}
+{{ $placeholder := .Get "placeholder" | default nil }}
+{{ $readonly := .Get "readonly" | default nil }}
+{{ $required := .Get "required" | default nil }}
+{{ $size := .Get "size" | default nil }}
+{{ $spellcheck := .Get "spellcheck" | default nil }}
+{{ $step := .Get "step" | default nil }}
+{{ $tabindex := .Get "tabindex" | default nil }}
+{{ $type := .Get "type" | default nil }}
+{{ $value := .Get "value" | default nil }}
+{{ $width := .Get "width" | default nil }}
+{{ partial "components/textinput.html" (dict "attrs" (dict "id" $id "name" $name "class" $class "autocomplete" $autocomplete "autofocus" $autofocus "disabled" $disabled "form" $form "formaction" $formaction "formmethod" $formmethod "formtarget" $formtarget "height" $height "max" $max "maxlength" $maxlength "min" $min "minlength" $minlength "multiple" $multiple "pattern" $pattern "placeholder" $placeholder "readonly" $readonly "required" $required "size" $size "spellcheck" $spellcheck "step" $step "tabindex" $tabindex "type" $type "value" $value "width" $width)) }}
+{{ if eq "false" $autocomplete }}
+  <p>{{ partial "components/alert.html" (dict "type" "error" "body" (errorf "Invalid autocomplete value for textinput. Did you mean \"off\" instead of %q?" $autocomplete)) }}</p>
+{{ end }}

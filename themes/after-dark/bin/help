@@ -1,0 +1,29 @@
+#!/bin/sh
+
+#
+# Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+#
+# This file is part of After Dark.
+#
+# After Dark is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# After Dark is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+THEME_PATH=themes/after-dark
+
+echo "Starting help server ..."
+kill $(ps aux | awk '/[h]ugo.*1414/ {print $2}') 2>/dev/null
+cd "$THEME_PATH"/docs && hugo serve --disableLiveReload --port 1414 1>/dev/null &
+echo "Help server started at http://localhost:1414/"
+echo "To stop it run \"kill \$(ps aux | awk '/[h]ugo.*1414/ {print \$2}')\"."
+echo "To start it again run \"./themes/after-dark/bin/help\"."

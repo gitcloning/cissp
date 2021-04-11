@@ -1,0 +1,79 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/}}
+
+{{ $valid_processing_methods := (slice "resize" "fit" "fill") }}
+{{ $options := .options | default slice }}
+{{ $image_processing_method := default "fill" (index $options 0) }}
+{{ $image_processing_options := index $options 1 }}
+{{ if not (in $valid_processing_methods $image_processing_method) }}
+  {{ errorf "Invalid thumbnail processing method: Must be one of 'fit', 'fill' or 'resize'." }}
+{{ else }}
+  {{ $scratch := newScratch }}
+  {{ with .node.Resources.GetMatch "*thumbnail*" }}
+    {{ $meta_sameas := .Params.meta.sameas }}
+    {{ $meta_license := .Params.meta.license }}
+    {{ $meta_creator := .Params.meta.creator }}
+    {{ $meta_description := .Params.meta.description }}
+    {{ $meta_keywords := .Params.meta.keywords }}
+    {{ $meta_contentlocation := .Params.meta.contentlocation }}
+    {{ if (eq $image_processing_method "resize") }}
+      {{ $scratch.Set "lodpi" (.Resize (default "400x300 q60 Gaussian" $image_processing_options)) }}
+      {{ $scratch.Set "hidpi" (.Resize (printf "%dx%d q90 Gaussian" (mul ($scratch.Get "lodpi").Width 2) (mul ($scratch.Get "lodpi").Height 2))) }}
+    {{ else if (eq $image_processing_method "fit") }}
+      {{ $scratch.Set "lodpi" (.Fit (default "400x300" $image_processing_options)) }}
+      {{ $scratch.Set "hidpi" (.Fit (printf "%dx%d" (mul ($scratch.Get "lodpi").Width 2) (mul ($scratch.Get "lodpi").Height 2))) }}
+    {{ else }}
+      {{ $scratch.Set "lodpi" (.Fill (default "400x300 Center" $image_processing_options)) }}
+      {{ $scratch.Set "hidpi" (.Fill (printf "%dx%d Center" (mul ($scratch.Get "lodpi").Width 2) (mul ($scratch.Get "lodpi").Height 2))) }}
+    {{ end }}
+    <figure aria-hidden="true" itemscope itemtype="https://schema.org/ImageObject">
+      <link itemprop="contentUrl" href="{{ .RelPermalink }}">
+      <meta itemprop="encodingFormat" content="{{ .MediaType }}">
+      <meta itemprop="name" content="{{ .Name | plainify }}">
+      {{ with .Title }}
+        <meta itemprop="headline" content="{{ . }}">
+      {{ end }}
+      {{ with $meta_creator }}
+        <meta itemprop="creator" content="{{ . | plainify -}}">
+      {{ end }}
+      {{ if (urls.Parse $meta_sameas).Host }}
+        <link itemprop="sameAs" href="{{ $meta_sameas }}">
+      {{ end }}
+      {{ if (urls.Parse $meta_license).Host }}
+        <link itemprop="license" href="{{ $meta_license }}">
+      {{ end }}
+      {{ with $meta_keywords }}
+        <meta itemprop="keywords" content="{{ delimit . ", " }}">
+      {{ end }}
+      {{ with $meta_contentlocation }}
+        <meta itemprop="contentLocation" content="{{ . | plainify }}">
+      {{ end }}
+      {{ with $meta_description }}
+        <meta itemprop="description" content="{{ . | plainify }}">
+      {{ end }}
+      <img
+        itemprop="thumbnailUrl"
+        alt="{{ with $meta_description }}{{ . }}{{ else }}{{ .Name | plainify }}{{ end }}"
+        class="lazyload blur-up"
+        src="{{ ($scratch.Get "lodpi").RelPermalink }}"
+        data-src="{{ ($scratch.Get "hidpi").RelPermalink }}"
+      >
+    </figure>
+  {{ end }}
+{{ end }}

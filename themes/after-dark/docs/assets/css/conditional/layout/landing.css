@@ -1,0 +1,187 @@
+:root {
+  --vertical-rhythm: 5rem;
+  --logo-animation-filter-start: drop-shadow(0 -25px 45px #ff2e88) brightness(1) drop-shadow(0 -55px 35px #ff2e88) brightness(1) drop-shadow(0 -35px 155px #ff9800) brightness(4);
+  --logo-animation-filter-end: drop-shadow(0 -20px 45px #ff2e88) brightness(.1) drop-shadow(0 0 5px #ff2e88) brightness(.7) drop-shadow(0 -20px 135px #ff2e88) brightness(2);
+}
+main, footer, header, caption {
+  text-align: center;
+}
+nav[itemtype*="SiteNavigationElement"] {
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+nav[itemtype*="SiteNavigationElement"]:focus-within {
+  opacity: 1;
+  transition: opacity 300ms ease;
+}
+@media screen and (max-width: 768px) {
+  nav[itemtype*="SiteNavigationElement"] {
+    display: none;
+  }
+  .hack header h1 {
+    margin-top: 2rem !important;
+  }
+  .grid {
+    flex-direction: row;
+  }
+  .cell {
+    flex: 1;
+  }
+}
+.shaded {
+  filter: var(--logo-animation-filter-start);
+  opacity: 0;
+}
+.animated {
+  /* FIXME: Animation disabled due to browser conflict with Web Miner */
+  animation: reveal 2s both;
+  opacity: 1; /* remove with fix */
+  filter: var(--logo-animation-filter-end); /* remove with fix */
+}
+@keyframes reveal {
+  from {
+    filter: var(--logo-animation-filter-start);
+  }
+  to {
+    filter: var(--logo-animation-filter-end);
+    opacity: 1;
+  }
+}
+.hack .grid {
+  justify-content: center;
+}
+.hack header h1:after {
+  content: none;
+}
+.hack header h1 {
+  font-family: Futura,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+  padding: 0;
+  margin: 1rem;
+  font-size: 3em;
+  display: inline-block;
+
+  background-color: #2a3439;
+  color: transparent;
+  text-shadow: 0 2px 3px rgba(255, 255, 255, 0.1);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  filter: brightness(3);
+}
+.hack header h1 sup {
+  font-size: 1rem;
+}
+.hack header h1 sup:before {
+  content: " ";
+}
+.hack header h2:before,
+.hack section h2:before {
+  content: unset;
+}
+.hack header h2,
+.hack section h2 {
+  margin-top: .8rem;
+  font-size: 1.2em;
+}
+.hack header h2 {
+  margin-top: -1rem;
+}
+.hack .install.cta {
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+}
+.hack .install.cta form[action*="quick-install"] {
+  width: unset;
+}
+.hack .install.cta form[action*="quick-install"] button {
+  border-radius: 4px;
+  color: #ccc;
+  background-color: #ff2e8860;
+  transition: all 0.25s ease;
+}
+.hack .install.cta form[action*="quick-install"] button:hover,
+.hack .install.cta form[action*="quick-install"] button:focus {
+  background-color: #ff2e8880;
+  color: #fff;
+}
+.hack .install.cta form[action*="quick-install"] button svg {
+  stroke: #ff9800;
+}
+.hack section:not(.capabilities) {
+  margin: var(--vertical-rhythm) 0;
+}
+.hack section.logo a {
+  border-bottom: none;
+  background-color: inherit;
+}
+.hack section.hero {
+  margin-top: -3rem;
+  margin-bottom: 0;
+}
+.hack section.hero img {
+  pointer-events: none;
+}
+.hack section.feature ul li {
+  display: inline;
+  padding-left: unset;
+}
+.hack section.feature ul > li::after {
+  position: unset;
+  content: "";
+}
+.hack section.feature ul > li:not(:last-of-type)::after {
+  content: " | ";
+}
+.hack section.hero figure {
+  margin: 0;
+  line-height: 0;
+  min-height: 266px;
+}
+@media screen and (min-width: 768px) {
+  .hack section.hero figure img {
+    margin: -3em 0 -2em;
+  }
+}
+.hack section.tagline p {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+.hack section.capabilities table a {
+  display: block;
+}
+.hack footer section.cta {
+  margin-top: 6rem;
+}
+.hack footer section.cta a {
+  border-bottom: none;
+  background-color: inherit;
+  color: #ff9800;
+  display: inline-block;
+}
+.hack footer section.cta a:hover {
+  color: #fff;
+}
+.hack footer section.cta a small {
+  display: block;
+}
+.hack.dark table tbody td:first-child {
+  color: inherit;
+  font-weight: initial;
+}
+.hack.dark table tr th {
+  background-color: #1976d220;
+}
+.hack.dark table tr td a {
+  border: 1px solid #2196f340;
+  padding: 0.25rem;
+}
+.hack.dark table tr td a:hover {
+  transition: all 300ms ease;
+  background-color: #ff2e8860;
+  border-color: #2196f360;
+}
+.hack.dark table tr td a:not(:hover) {
+  transition: all 300ms ease;
+  background-color: #ff2e8825;
+}

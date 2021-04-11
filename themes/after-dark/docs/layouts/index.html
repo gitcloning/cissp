@@ -1,0 +1,119 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/}}
+
+{{ define "title" -}}
+  Hugo Dark Theme Site Generator | {{ .Params.title }}
+{{- end }}
+{{ define "header" }}
+  {{ partial "masthead.html" . }}
+{{ end }}
+{{ define "main" }}
+  {{ with resources.Get "css/conditional/layout/landing.css" | minify }}
+    <style>{{ .Content | safeCSS }}</style>
+  {{ end }}
+  <header>
+    <h1>{{ .Title }}<sup class="muted">v{{ .Site.Data.npm.latest.version }}</sup></h1>
+    <h2 class="muted">Hugo Dark Theme Site Generator</h2>
+  </header>
+  <section class="grid logo">
+    <a class="cell -12of12" rel="author" target="_self" href="https://habd.as/code/after-dark/">
+      <svg class="shaded animated" viewBox="0 0 46 45" width="92" height="90" xmlns="http://www.w3.org/2000/svg">
+        <title>After Dark</title>
+        <path d="M.708 45L23 .416 45.292 45H.708zM35 38L23 19 11 38h24z" fill="#000"/>
+      </svg>
+    </a>
+  </section>
+  <section class="grid tagline">
+    <div class="cell -12of12">
+      <p>{{ .Description }}</p>
+    </div>
+  </section>
+  <section class="install cta">
+    {{ .Content }}
+  </section>
+  <section class="hero">
+    {{ partial "components/figure.html" (dict "alt" "After Dark screenshots" "src" "/images/minimal-mac_2400x1800-fs8.png" "lqipsrc" "/images/minimal-mac_800x600-fs8.png") }}
+  </section>
+  {{ range .Params.spotlight }}
+    <section id="feature-{{ .name }}" class="{{ if eq .name "workflow" }}capabilities{{ else }}feature{{ end }}">
+      {{ with .icon }}
+        {{ (resources.Get (printf "svg/vendor/bytesize-icons/%s.svg" .)).Content | safeHTML }}
+      {{ end }}
+      <h2{{ if eq .beta true }} style="margin-bottom:0.2rem"{{ end }}>{{ .title | title }}</h2>
+      {{ if eq .beta true }}
+        <small><i style="color:lime">(Now in Beta!)</i></small>
+      {{ end }}
+      {{ if eq .name "workflow" }}
+        <table>
+          <caption>{{ .description | markdownify }}</caption>
+          <tr>
+            <th scope="col" width="25%">Features</th>
+            <th scope="col" width="25%">Modules</th>
+            <th scope="col" width="25%">Shortcodes</th>
+            <th scope="col" width="25%">Extras</th>
+          </tr>
+          <tr>
+            <td><a href="./feature/">40</a></td>
+            <td><a href="./module/">4</a></td>
+            <td><a href="./shortcode/">27+</a></td>
+            <td><a href="./extra/">2</a></td>
+          </tr>
+        </table>
+      {{ else }}
+        <p>{{ .description | markdownify }}</p>
+        <ul>{{ range .link }}
+          <li><a href="{{ .href }}"{{ with .target }} target="{{ . }}"{{ end }}{{ with .rel }} rel="{{ . }}"{{ end }}>{{ .text }}</a>
+        {{ end }}</ul>
+      {{ end }}
+    </section>
+  {{ end }}
+  <footer>
+    <section class="grid cta">
+      <a target="_self" class="cell -2of12" itemtype="significantLink" rel="prefetch noreferrer" href="https://t.me/afterdarkupdates">
+        <svg id="updates" aria-lebelledby="updates-label" class="i-bell" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <path d="M8 17 C8 12 9 6 16 6 23 6 24 12 24 17 24 22 27 25 27 25 L5 25 C5 25 8 22 8 17 Z M20 25 C20 25 20 29 16 29 12 29 12 25 12 25 M16 3 L16 6" />
+        </svg>
+        <small role="tooltip" id="updates-label">Updates</small>
+      </a>
+      <a target="_self" class="cell -2of12" itemtype="significantLink" rel="prefetch" href="https://git.habd.as/comfusion/after-dark/">
+        <svg id="source" aria-labelledby="source-label" class="i-code" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <path d="M10 9 L3 17 10 25 M22 9 L29 17 22 25 M18 7 L14 27" />
+        </svg>
+        <small role="tooltip" id="source-label">Source</small>
+      </a>
+      <a target="_blank" class="cell -2of12" itemtype="significantLink" rel="noopener noreferrer nofollow" href="irc://chat.freenode.net:6667/after-dark">
+        <svg id="chat" aria-labelledby="chat-label" class="i-message" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <path d="M2 4 L30 4 30 22 16 22 8 29 8 22 2 22 Z" />
+        </svg>
+        <small role="tooltip" id="chat-label">Chat</small>
+      </a>
+      <a target="_self" class="cell -2of12" itemtype="significantLink" rel="prefetch" href="https://git.habd.as/comfusion/after-dark/releases">
+        <svg id="download" aria-labelledby="download-label" class="i-download" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <path d="M9 22 C0 23 1 12 9 13 6 2 23 2 22 10 32 7 32 23 23 22 M11 26 L16 30 21 26 M16 16 L16 30" />
+        </svg>
+        <small role="tooltip" id="download-label">Download</small>
+      </a>
+    </section>
+  </footer>
+{{ end }}
+{{ define "footer" }}
+  <small class="muted">
+    {{ partial "copyright-notice.html" . }}
+  </small>
+{{ end }}

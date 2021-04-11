@@ -1,0 +1,43 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/ -}}
+
+<ul class="thumbnail grid" itemscope itemtype="https://schema.org/ItemList">
+  <meta itemprop="itemListOrder" content="Unordered">
+  <meta itemprop="name" content="{{ .index.Title }}">
+  <meta itemprop="numberOfItems" content="{{ (default .page_count .limit) }}">
+  {{ $thumbnail_options := .thumbnail_options }}
+  {{ $show_readingtime := .show_readingtime }}
+  {{ range first (default .page_count .limit) .pages }}
+    {{ $page_schema := .Params.schema }}
+    {{ $section_schema := (.Site.GetPage "section" .Page.Type).Params.schema }}
+    {{ $schema_type := (default $section_schema.type $page_schema.type) | default "Thing" }}
+    <li class="cell" itemprop="itemListElement" itemscope itemtype="https://schema.org/{{ $schema_type }}">
+      <a itemprop="url" href="{{ .RelPermalink }}">
+        {{ partial "image/thumbnail.html" (dict "node" . "options" $thumbnail_options) }}
+        <h2 itemprop="name">{{ .Title }}</h2>
+      </a>
+      <small itemprop="description">
+        {{ .Description }}
+        {{ if $show_readingtime }}
+          <time class="muted" datetime="{{ .ReadingTime }}M">{{ .ReadingTime }} minutes</time>
+        {{ end }}
+      </small>
+    </li>
+  {{ end }}
+</ul>

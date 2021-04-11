@@ -1,0 +1,9 @@
+{{ $crossorigin := .crossorigin }}
+{{ if ne .enabled false }}
+  <meta title="mod:fractal-forest" content="status:enabled">
+  {{ range .decoders }}
+    <script async src={{ printf "/js/%s.js" . | relURL }} integrity={{ printf "sha384-%s" (readFile (printf "themes/fractal-forest/static/js/%s.js.sha384" .)) }}{{ with $crossorigin }} crossorigin={{ . }}{{ end }}></script>
+  {{ end }}
+{{ else }}
+  <meta title="mod:fractal-forest" content="status:disabled">
+{{ end }}

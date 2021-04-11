@@ -1,0 +1,64 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/}}
+
+{{ define "title" -}}
+  {{ .Title }} | {{ .Site.Title }}
+{{- end }}
+{{ define "header" }}
+  {{ partial "masthead.html" . }}
+{{ end }}
+{{ define "main" }}
+  <header>
+    <h1>{{ .Title }}</h1>
+    {{ if .Description }}
+      <blockquote itemprop="description">{{ .Description }}</blockquote>
+    {{ end }}
+  </header>
+  {{ .Content }}
+  <footer>
+    <hr>
+    <p>
+      Published
+      {{ with .Params.categories }}
+        in <span itemprop="articleSection">{{ delimit (apply (apply (sort .) "partial" "category-link.html" ".") "chomp" ".") ", " " and " }}</span>
+      {{ end }}
+      {{ with .Params.features }}
+        using {{ delimit (apply (apply (sort .) "partial" "feature-link.html" ".") "chomp" ".") ", " " and " }}.
+      {{ else }}
+        using basic features.
+      {{ end }}
+    </p>
+    {{ partial "post/related-content.html" . }}
+  </footer>
+{{ end }}
+{{ define "footer" }}
+  <hr>
+  <small class="muted">
+    {{ partial "copyright-notice.html" . }}
+  </small>
+  {{ if in .Page.RelPermalink "toxic-swamp" }}
+    {{ if eq .Params.slug "toxic-swamp" }}
+      {{ $config_generator := resources.Get "/js/config-generator.js" }}
+      <script src="{{ $config_generator.Permalink }}" integrity="{{ ($config_generator | resources.Fingerprint "sha512").Data.Integrity }}"></script>
+    {{ else if in .Page.RelPermalink "configuration" }}
+      {{ $configuration := resources.Get "/js/configuration.js" }}
+      <script src="{{ $configuration.Permalink }}" integrity="{{ ($configuration | resources.Fingerprint "sha512").Data.Integrity }}"></script>
+    {{ end }}
+  {{ end }}
+{{ end }}

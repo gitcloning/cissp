@@ -1,0 +1,56 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/}}
+
+{{ define "header" }}
+  {{ partial "masthead.html" . }}
+{{ end }}
+{{ define "main" }}
+  <header>
+    <h1>{{ .Title }}</h1>
+    {{ if .Description }}
+      <blockquote itemprop="description">{{ .Description }}</blockquote>
+    {{ end }}
+  </header>
+  <table>
+    <caption>Add lazy-loaded images, alerts, blockquotes and design great-looking web forms directly from within your content. Dozens of examples provided below:</caption>
+    <thead>
+      <tr>
+        <th scope="col">{{ .Title | singularize }}</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <nav>
+        {{ range .Paginator.Pages }}
+          <tr>
+            <td><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
+            <td>{{ .Description }}</td>
+          </tr>
+        {{ end }}
+      </nav>
+    </tbody>
+  </table>
+  <p>In addition to the above you may {{ partial "components/external.html" (dict "href" "https://gohugo.io/content-management/shortcodes/#use-hugo-s-built-in-shortcodes" "body" "Use Hugo's Built-in Shortcodes") }} as well.</p>
+{{ end }}
+{{ define "footer" }}
+  <p>{{ partial "pagination.html" . }}</p>
+  <small class="muted">
+    {{ partial "copyright-notice.html" . }}
+  </small>
+{{ end }}

@@ -1,0 +1,56 @@
+{{/*
+Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+
+This file is part of After Dark.
+
+After Dark is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+After Dark is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/}}
+
+{{ define "header" }}
+  {{ partial "masthead.html" . }}
+{{ end }}
+{{ define "main" }}
+  {{ if ne $.Site.Params.hackcss.disabled true }}
+    {{ with resources.Get "css/conditional/layouts/post/single.css" | minify }}
+      <style>{{ .Content | safeCSS }}</style>
+    {{ end }}
+  {{ end }}
+  <article itemscope itemtype="https://schema.org/BlogPosting">
+    {{ template "_internal/schema.html" . }}
+    <header>
+      <h1 itemprop="headline name">{{ .Title }}</h1>
+      <p class="muted">
+        {{ partial "post/meta.html" . }}
+      </p>
+      {{ if .Description }}
+        <blockquote itemprop="description">{{ .Description }}</blockquote>
+      {{ end }}
+      {{ partial "image/header.html" . }}
+    </header>
+    {{ partial "toc-maybe.html" . }}
+    <div itemprop="articleBody">
+      {{ .Content }}
+    </div>
+    <footer>
+      <hr>
+      {{ partial "post/byline.html" . }}
+      {{ partial "post/related-content.html" . }}
+    </footer>
+  </article>
+{{ end }}
+{{ define "footer" }}
+  <small class="muted">
+    {{ partial "copyright-notice.html" . }}
+  </small>
+{{ end }}

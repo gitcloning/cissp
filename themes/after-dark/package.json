@@ -1,0 +1,55 @@
+{
+  "name": "after-dark",
+  "version": "9.2.3",
+  "description": "Hugo Dark Theme Site Generator",
+  "author": "Josh Habdas <jhabdas@protonmail.com> (https://habd.as)",
+  "keywords": [
+    "hugo",
+    "dark",
+    "theme",
+    "website",
+    "blog"
+  ],
+  "homepage": "https://after-dark.habd.as",
+  "repository": {
+    "type": "git",
+    "url": "https://git.habd.as/comfusion/after-dark.git"
+  },
+  "standard-version": {
+    "scripts": {
+      "posttag": "git tag --sign $(git describe --tags $(git rev-list --tags --max-count=1)) $(git describe --tags $(git rev-list --tags --max-count=1))^{} -f -m \"$(git log -1 --pretty=%B)\" -m \"-----BEGIN DIST INTEGRITY-----\" -m \"$(npm pack --dry-run --json . | grep integrity | cut -d ',' -f1 | cut -d ':' -f2 | tr -d '\" ')\" -m \"-----END DIST INTEGRITY-----\""
+    }
+  },
+  "scripts": {
+    "update:lazysizes": "npm up lazysizes && cp -i node_modules/lazysizes/lazysizes.min.js static/js",
+    "update:lodash:custom": "./node_modules/.bin/lodash include=debounce -p -o static/js/lodash.custom.min.js",
+    "update:fuse": "npm up fuse.js && cp -i node_modules/fuse.js/dist/fuse.js static/js/fuse.min.js",
+    "update:vue": "npm up vue && cp -i node_modules/vue/dist/vue.min.js static/js",
+    "update:mark": "npm up mark.js && cp -i node_modules/mark.js/dist/mark.min.js static/js",
+    "update:hackcss": "npm up hackcss && cp -ir node_modules/hack/dist/ assets/css/vendor/hack/",
+    "update:fetch-inject": "npm up fetch-inject && cp -i node_modules/fetch-inject/dist/fetch-inject.min.js assets/js/vendor/fetch-inject.min.js",
+    "test": "while true; do head -n 100 /dev/urandom; sleep 0.1; done | hexdump -C | grep 'ca fe'",
+    "integrity": "npm pack --dry-run --json . | grep integrity | cut -d ',' -f1 | cut -d ':' -f2 | tr -d '\" '",
+    "release": "standard-version",
+    "commit": "npx git-cz"
+  },
+  "devDependencies": {
+    "atom-one-chroma": "^2.0.0",
+    "commitizen": "^4.2.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "fetch-inject": "^2.0.4",
+    "fuse.js": "^6.4.5",
+    "hack": "^0.8.1",
+    "lazysizes": "^5.3.0",
+    "lodash-cli": "^4.17.5",
+    "mark.js": "^8.11.1",
+    "standard-version": "^9.1.0",
+    "vue": "^2.6.12"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "license": "AGPL-3.0-or-later"
+}

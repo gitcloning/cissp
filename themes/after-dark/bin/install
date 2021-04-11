@@ -1,0 +1,170 @@
+#!/bin/sh -e
+#
+# Copyright (C) 2019  Josh Habdas <jhabdas@protonmail.com>
+#
+# This file is part of After Dark.
+#
+# After Dark is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# After Dark is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+validate_hugo () {
+   # Exit with error if hugo is not installed
+   if ! hash hugo 2>/dev/null ; then
+     echo "Error: After Dark requires Hugo version 0.51 or greater" >&2; exit 1
+   fi
+
+   # Exit with error if not minimum required hugo version
+   re="v(0\d*\.([5-9][1-9]|[6-9])|[1-9]).*"
+   if ! hugo version | grep -qE "$re" ; then
+      echo "Error: After Dark requires Hugo version 0.51 or greater" >&2; exit 1
+   fi
+}
+
+create_site_dir () {
+   SITE_DIR="flying-toasters"
+   if [ "$1" != "" ] ; then
+      SITE_DIR="$1"
+   fi
+
+   SITE_DIR_ABS="$PWD/$SITE_DIR"
+   mkdir -p "$SITE_DIR"
+}
+
+create_site () {
+   echo "Creating a new Hugo site ..."
+   hugo new site "$SITE_DIR" 1>/dev/null
+   cd "$SITE_DIR" || exit 1
+}
+
+download_theme () {
+   echo "Downloading the latest version of After Dark ..."
+   LATEST_META=$(wget -qO - https://registry.npmjs.org/after-dark/latest)
+   vers=$(echo "$LATEST_META" | grep -oE "\"version\".*[^,]*," | cut -d ',' -f1 | cut -d ':' -f2 | tr -d '" ')
+   mkdir -p themes/after-dark
+   wget -qO - https://registry.npmjs.org/after-dark/-/after-dark-"$vers".tgz | tar --strip-components=1 -xz -C themes/after-dark
+   echo "Version $vers downloaded to $SITE_DIR/themes/after-dark"
+}
+
+download_module () {
+   [ -z "$1" ] && { echo "Error: Attempt to download undefined module" >&2; exit 1; }
+   echo "Downloading $1 module for After Dark ..."
+   meta=$(wget -qO - https://registry.npmjs.org/"$1"/latest)
+   vers=$(echo "$meta" | grep -oE "\"version\".*[^,]*," | cut -d ',' -f1 | cut -d ':' -f2 | tr -d '" ')
+   mkdir -p themes/"$1"
+   wget -qO - https://registry.npmjs.org/"$1"/-/"$1"-"$vers".tgz | tar --strip-components=1 -xz -C themes/"$1"
+   echo "Version $vers downloaded to $SITE_DIR/themes/$1"
+}
+
+configure_theme () {
+   echo "Configuring basic After Dark theme settings ..."
+   tee "config.toml" > /dev/null <<TOML
+baseurl = "https://domain.example" # Controls base URL sitewide
+languageCode = "en-US" # Controls site language
+title = "After Dark" # Homepage title and page title suffix
+paginate = 11 # Number of posts to show before paginating
+copyright = "Copyright &copy; Copyright Owner. Licensed under <a target=\"_blank\" rel=\"external noopener license\" href=\"https://creativecommons.org/licenses/by-nd/4.0/\">CC-BY-ND-4.0</a>." # Optional, remove to suppress copyright notices
+
+# Controls default theme and theme components
+theme = [
+  "fractal-forest", # OBSD
+  "after-dark" # AGPL-3.0-or-later
+]
+
+disableLiveReload = false # Optional, set true to disable live reload
+enableRobotsTXT = true # Suggested, enable robots.txt file
+sectionPagesMenu = "main" # Enable menu system for lazy bloggers
+
+[markup.goldmark.renderer]
+  unsafe = true # Optional, allows HTML inside your CommonMark content
+[markup.tableOfContents]
+  startLevel = 1 # Suggested, draws TOC using all heading levels
+  endLevel = 6 # Suggested, draws TOC using all heading levels
+[markup.highlight]
+  noClasses = false # Suggested, used for custom syntax highlighting
+
+[params]
+  description = "" # Suggested, controls default description meta
+  author = "" # Optional, controls author name display on posts
+  hide_author = false # Optional, set true to hide author name on posts
+  disable_csp = false # Optional, set true to disable content security policy
+  images = [
+    "https://source.unsplash.com/collection/983219/2000x1322"
+  ] # Suggested, controls default Open Graph images
+
+[params.layout.menu.main]
+  hidden = true # Optional, set false or remove to show section menu
+
+[params.layout.footer]
+  hidden = false # Optional, set true to hide footer
+
+[params.modules.fractal_forest]
+  enabled = true # Optional, set false to disable module
+  decoders = ["bpgdec8a"] # Optional, 8-bit javascript decoder with animation
+TOML
+}
+
+update_archetypes () {
+   echo "Updating the default content archetype ..."
+   rm -f archetypes/default.md
+   cp themes/after-dark/archetypes/default.md archetypes
+}
+
+create_welcome_post () {
+   echo "Creating welcome post ..."
+   hugo new post/welcome.md 1>/dev/null
+}
+
+serve_site () {
+   echo "Starting site server ..."
+   hugo serve --buildDrafts --navigateToChanged --port 1313 1>/dev/null &
+}
+
+generate_help_docs () {
+   echo "Generating help documentation ..."
+   THEME_PATH=themes/after-dark
+   meta_path="$THEME_PATH"/data/npm
+   mkdir -p "$meta_path" && echo "$LATEST_META" | tr '\r\n' ' ' > "$meta_path"/latest.json
+   cd "$THEME_PATH"/docs && mkdir themes && ln -s ../.. "$THEME_PATH"
+   hugo new validate.md --kind validate 1>/dev/null
+}
+
+serve_help () {
+   echo "Starting help server ..."
+   hugo serve --disableLiveReload --port 1414 1>/dev/null &
+}
+
+echo "Welcome to the After Dark quick installer. Press CTRL-C at any time to abort."
+
+validate_hugo
+create_site_dir "$1"
+create_site
+download_theme
+update_archetypes
+download_module "fractal-forest"
+configure_theme
+create_welcome_post
+serve_site
+generate_help_docs
+serve_help
+
+YELLOW='\033[0;33m'
+NC='\033[0m'
+
+printf "${YELLOW}Installation successful!${NC}\n"
+echo "Site created in $SITE_DIR_ABS"
+echo "Site server started at http://localhost:1313/"
+echo "To stop it run \"kill \$(ps aux | awk '/[h]ugo.*1313/ {print \$2}')\"."
+echo "Help server started at http://localhost:1414/"
+echo "To stop and restart it run \"./themes/after-dark/bin/help\"."
+echo "Thank you for choosing After Dark."
